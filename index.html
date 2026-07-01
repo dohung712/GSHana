@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hana Laundry — Sổ Thu Chi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  :root{
+    --bg: #EEF6F5;
+    --bg-wash: #E1F0EE;
+    --surface: #FFFFFF;
+    --surface-alt: #F4FAF9;
+    --ink: #143238;
+    --ink-soft: #5B7679;
+    --ink-faint: #93ACAE;
+    --primary: #0E7C86;
+    --primary-dark: #0A5F67;
+    --primary-pale: #D9EEEC;
+    --accent: #FF8A5B;
+    --accent-dark: #E06B3C;
+    --success: #2F9E44;
+    --success-pale: #E4F6E7;
+    --danger: #E8590C;
+    --danger-pale: #FDE9DD;
+    --line: #D7E9E7;
+    --shadow: 0 8px 24px -12px rgba(14,124,134,0.25);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 8% 8%, var(--bg-wash) 0%, transparent 45%),
+      radial-gradient(circle at 95% 15%, var(--primary-pale) 0%, transparent 40%),
+      var(--bg);
+    min-height:100vh;
+    font-family:'Be Vietnam Pro', system-ui, sans-serif;
+    color:var(--ink);
+  }
+  .app{ max-width: 800px; margin: 0 auto; padding: 20px 16px 60px; }
+
+  .app-header{
+    position:relative;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-radius: 24px;
+    padding: 26px 24px 22px;
+    color: #fff;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .bubbles{ position:absolute; inset:0; pointer-events:none; }
+  .bubble{
+    position:absolute; border-radius:50%;
+    background: rgba(255,255,255,0.14);
+    animation: float 7s ease-in-out infinite;
+  }
+  .bubble.b1{ width:70px; height:70px; right:18px; top:-20px; animation-delay:0s;}
+  .bubble.b2{ width:34px; height:34px; right:90px; top:30px; animation-delay:1.2s;}
+  .bubble.b3{ width:18px; height:18px; right:150px; top:-6px; background:rgba(255,138,91,0.35); animation-delay:2.1s;}
+  .bubble.b4{ width:50px; height:50px; right:-10px; top:60px; animation-delay:0.6s;}
+  @keyframes float{
+    0%,100%{ transform: translateY(0px); }
+    50%{ transform: translateY(-10px); }
+  }
+  .header-content h1{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:800;
+    font-size: 26px;
+    margin: 0 0 2px;
+    letter-spacing: 0.2px;
+  }
+  .header-content .subtitle{
+    margin:0; font-size:13.5px; color: rgba(255,255,255,0.85); font-weight:500;
+  }
+  .month-nav{
+    margin-top:18px;
+    display:flex; align-items:center; justify-content:space-between;
+    background: rgba(255,255,255,0.14);
+    border-radius: 14px;
+    padding: 6px 8px;
+  }
+  .month-nav button{
+    width:34px; height:34px; border-radius:10px; border:none;
+    background: rgba(255,255,255,0.18);
+    color:#fff; font-size:18px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition: background 0.15s;
+  }
+  .month-nav button:hover{ background: rgba(255,255,255,0.32); }
+  .month-label{
+    font-family:'Baloo 2', sans-serif; font-weight:700; font-size:16px;
+    text-transform:capitalize;
+  }
+
+  .tabs{
+    display:flex; flex-wrap:wrap; gap:6px; margin: 18px 0 16px;
+    background: var(--surface); border-radius:14px; padding:5px;
+    box-shadow: var(--shadow);
+  }
+  .tab-btn{
+    flex: 1 1 30%; border:none; background:transparent; cursor:pointer;
+    padding: 10px 6px; border-radius:10px;
+    font-family:'Be Vietnam Pro', sans-serif; font-weight:600; font-size:12.5px;
+    color: var(--ink-soft);
+    transition: background 0.15s, color 0.15s;
+    white-space:nowrap;
+  }
+  .tab-btn.active{ background: var(--primary); color:#fff; }
+  .tab-btn:not(.active):hover{ background: var(--surface-alt); color: var(--ink); }
+
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; animation: fadeIn 0.2s ease; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+
+  .card{
+    background: var(--surface); border-radius:18px; padding:18px;
+    box-shadow: var(--shadow); margin-bottom:16px;
+  }
+  .card h2{
+    font-family:'Baloo 2', sans-serif; font-size:16px; font-weight:700;
+    margin: 0 0 14px; color: var(--primary-dark);
+  }
+  .card h2 .sub{ font-size:11.5px; color:var(--ink-faint); font-weight:500; display:block; margin-top:2px; }
+  .entry-form{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+  .entry-form .field.full{ grid-column: 1 / -1; }
+  .field label{
+    display:block; font-size:12px; font-weight:600; color: var(--ink-soft);
+    margin-bottom:5px;
+  }
+  .field input, .field select{
+    width:100%; padding:10px 11px; border-radius:10px;
+    border: 1.5px solid var(--line); background: var(--surface-alt);
+    font-family:'Be Vietnam Pro', sans-serif; font-size:14px; color:var(--ink);
+    outline:none; transition: border-color 0.15s, background 0.15s;
+  }
+  .field input:focus, .field select:focus{
+    border-color: var(--primary); background:#fff;
+  }
+  .field .hint{ font-size:11px; color:var(--ink-faint); margin-top:4px; }
+  .btn-primary{
+    grid-column: 1 / -1;
+    margin-top:2px;
+    background: var(--accent); color:#fff; border:none;
+    padding:12px; border-radius:12px; font-weight:700; font-size:14px;
+    font-family:'Be Vietnam Pro', sans-serif; cursor:pointer;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .btn-primary:hover{ background: var(--accent-dark); }
+  .btn-primary:active{ transform: scale(0.98); }
+  .btn-secondary{
+    background: var(--primary-pale); color: var(--primary-dark); border:none;
+    padding:11px 16px; border-radius:12px; font-weight:700; font-size:13.5px;
+    font-family:'Be Vietnam Pro', sans-serif; cursor:pointer;
+    transition: background 0.15s;
+    display:inline-flex; align-items:center; gap:6px;
+  }
+  .btn-secondary:hover{ background: var(--primary); color:#fff; }
+
+  .table-wrap{ overflow-x:auto; }
+  table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+  thead th{
+    text-align:left; font-weight:600; color:var(--ink-soft);
+    font-size:11.5px; text-transform:uppercase; letter-spacing:0.4px;
+    padding: 6px 8px; border-bottom: 1.5px solid var(--line);
+  }
+  tbody td{ padding: 9px 8px; border-bottom:1px solid var(--line); vertical-align:middle; }
+  tbody tr:last-child td{ border-bottom:none; }
+  .num{ font-family:'JetBrains Mono', monospace; font-weight:600; text-align:right; white-space:nowrap; }
+  .cash-col{ color: var(--primary-dark); }
+  .transfer-col{ color: var(--accent-dark); }
+  tfoot td{
+    padding: 10px 8px; font-weight:700; border-top:2px solid var(--primary);
+    font-family:'JetBrains Mono', monospace;
+  }
+  .note-col{ color: var(--ink-soft); font-size:12.5px; }
+  .del-btn{
+    border:none; background: var(--danger-pale); color: var(--danger);
+    width:26px; height:26px; border-radius:8px; cursor:pointer; font-size:14px;
+    line-height:1;
+  }
+  .del-btn:hover{ background: var(--danger); color:#fff; }
+  .empty-state{
+    text-align:center; color: var(--ink-faint); font-size:13px;
+    padding: 22px 10px;
+  }
+  .tag{
+    display:inline-block; padding:3px 9px; border-radius:20px;
+    font-size:11.5px; font-weight:600; background: var(--primary-pale); color: var(--primary-dark);
+  }
+
+  .toast{
+    position:fixed; left:50%; bottom:24px; transform: translateX(-50%) translateY(20px);
+    background: var(--ink); color:#fff; padding:10px 16px; border-radius:12px;
+    font-size:13px; display:flex; gap:12px; align-items:center;
+    opacity:0; pointer-events:none; transition: all 0.25s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    z-index:50;
+  }
+  .toast.show{ opacity:1; transform: translateX(-50%) translateY(0); pointer-events:auto; }
+  .toast button{
+    background: var(--accent); border:none; color:#fff; font-weight:700;
+    padding:6px 10px; border-radius:8px; cursor:pointer; font-size:12px;
+  }
+
+  .receipt{
+    background: var(--surface); border-radius: 6px 6px 18px 18px;
+    box-shadow: var(--shadow);
+    position:relative; padding: 4px 0 18px;
+    margin-bottom:16px;
+  }
+  .receipt-perf{
+    height:14px;
+    background-image: radial-gradient(circle at 10px 0, transparent 6px, var(--bg) 6.5px);
+    background-size: 20px 14px;
+    background-repeat: repeat-x;
+  }
+  .receipt-inner{ padding: 6px 24px 4px; }
+  .receipt-title{
+    text-align:center; font-family:'Baloo 2', sans-serif; font-weight:800;
+    color: var(--primary-dark); font-size:17px; margin: 10px 0 2px;
+  }
+  .receipt-sub{ text-align:center; color:var(--ink-faint); font-size:12px; margin-bottom:14px; }
+  .receipt-divider{ border:none; border-top: 1.5px dashed var(--line); margin: 12px 0; }
+  .receipt-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding: 5px 0; font-size:14px;
+  }
+  .receipt-row .label{ color: var(--ink-soft); }
+  .receipt-row .value{ font-family:'JetBrains Mono', monospace; font-weight:600; }
+  .receipt-row.big .value{ font-size:17px; }
+  .receipt-row.total{ font-size:16px; }
+  .receipt-row.total .value{ font-size:19px; font-weight:700; }
+  .profit-pos .value{ color: var(--success); }
+  .profit-neg .value{ color: var(--danger); }
+
+  .bar-compare{ display:flex; height:14px; border-radius:8px; overflow:hidden; margin:8px 0 4px; background:var(--surface-alt); }
+  .bar-cash{ background: var(--primary); }
+  .bar-transfer{ background: var(--accent); }
+  .legend{ display:flex; gap:16px; font-size:11.5px; color:var(--ink-soft); margin-bottom:4px;}
+  .legend span{ display:inline-flex; align-items:center; gap:5px; }
+  .dot{ width:9px; height:9px; border-radius:50%; display:inline-block; }
+
+  .cat-row{ display:flex; justify-content:space-between; font-size:13.5px; padding:5px 0; }
+  .cat-row .amt{ font-family:'JetBrains Mono', monospace; font-weight:600; color: var(--danger); }
+
+  .export-bar{ text-align:center; margin: 6px 0 18px; }
+
+  .util-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+  .util-result{
+    margin-top:14px; background: var(--surface-alt); border-radius:12px; padding:12px 14px;
+  }
+  .util-result .row{ display:flex; justify-content:space-between; font-size:13.5px; padding:4px 0; }
+  .util-result .row .v{ font-family:'JetBrains Mono', monospace; font-weight:700; }
+  .util-result .row.tot{ border-top: 1.5px dashed var(--line); margin-top:6px; padding-top:8px; font-size:14.5px; }
+
+  .trend-svg-wrap{ overflow-x:auto; }
+  .trend-table{ margin-top:12px; }
+  .legend-row{ display:flex; gap:16px; font-size:11.5px; color:var(--ink-soft); margin: 4px 0 10px; flex-wrap:wrap; }
+
+  @media (max-width:480px){
+    .entry-form, .util-grid{ grid-template-columns: 1fr; }
+    .app-header{ padding:22px 18px 18px; }
+    .header-content h1{ font-size:22px; }
+    .tab-btn{ flex-basis: 45%; font-size:12px; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="app-header">
+    <div class="bubbles">
+      <div class="bubble b1"></div>
+      <div class="bubble b2"></div>
+      <div class="bubble b3"></div>
+      <div class="bubble b4"></div>
+    </div>
+    <div class="header-content">
+      <h1>🫧 Hana Laundry</h1>
+      <p class="subtitle">Sổ thu chi — Giặt Sấy</p>
+    </div>
+    <div class="month-nav">
+      <button id="prevMonth" aria-label="Tháng trước">‹</button>
+      <div class="month-label" id="monthLabel">—</div>
+      <button id="nextMonth" aria-label="Tháng sau">›</button>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="daily">Doanh thu ngày</button>
+    <button class="tab-btn" data-tab="expense">Chi phí</button>
+    <button class="tab-btn" data-tab="utilities">Điện nước & Quỹ</button>
+    <button class="tab-btn" data-tab="summary">Tổng kết tháng</button>
+    <button class="tab-btn" data-tab="trend">Xu hướng</button>
+  </nav>
+
+  <main>
+    <section id="tab-daily" class="tab-panel active">
+      <div class="card">
+        <h2>➕ Thêm doanh thu trong ngày</h2>
+        <form id="revenueForm" class="entry-form">
+          <div class="field">
+            <label>Ngày</label>
+            <input type="date" id="revDate" required>
+          </div>
+          <div class="field">
+            <label>Số đơn / khách</label>
+            <input type="text" id="revOrders" placeholder="vd: 12">
+          </div>
+          <div class="field">
+            <label>Tiền mặt</label>
+            <input type="text" id="revCash" placeholder="vd: 2tr3 hoặc 2300000">
+          </div>
+          <div class="field">
+            <label>Chuyển khoản</label>
+            <input type="text" id="revTransfer" placeholder="vd: 6tr5 hoặc 6500000">
+          </div>
+          <div class="field full">
+            <label>Ghi chú</label>
+            <input type="text" id="revNote" placeholder="tuỳ chọn">
+          </div>
+          <div class="field full hint">Có thể gõ tắt: 6tr5 = 6.500.000đ · 512k = 512.000đ</div>
+          <button type="submit" class="btn-primary">Lưu doanh thu</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>📋 Doanh thu <span id="revMonthTag" class="tag"></span></h2>
+        <div class="table-wrap">
+          <table id="revenueTable">
+            <thead>
+              <tr><th>Ngày</th><th>Đơn</th><th>Ghi chú</th><th style="text-align:right">Tiền mặt</th><th style="text-align:right">CK</th><th></th></tr>
+            </thead>
+            <tbody id="revenueBody"></tbody>
+            <tfoot id="revenueFoot"></tfoot>
+          </table>
+        </div>
+        <p id="revenueEmpty" class="empty-state">Chưa có doanh thu nào trong tháng này.</p>
+      </div>
+    </section>
+
+    <section id="tab-expense" class="tab-panel">
+      <div class="card">
+        <h2>➕ Thêm chi phí
+          <span class="sub">Điện, nước nhập riêng ở tab "Điện nước & Quỹ"</span>
+        </h2>
+        <form id="expenseForm" class="entry-form">
+          <div class="field">
+            <label>Ngày</label>
+            <input type="date" id="expDate" required>
+          </div>
+          <div class="field">
+            <label>Loại chi phí</label>
+            <select id="expCategory">
+              <option>Nhân viên</option>
+              <option>Thuê mặt bằng</option>
+              <option>Vật tư / Hoá chất</option>
+              <option>Sửa chữa - Bảo trì</option>
+              <option>Khác</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Số tiền</label>
+            <input type="text" id="expAmount" placeholder="vd: 512k hoặc 512000" required>
+          </div>
+          <div class="field">
+            <label>Ghi chú</label>
+            <input type="text" id="expNote" placeholder="tuỳ chọn">
+          </div>
+          <button type="submit" class="btn-primary">Lưu chi phí</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>📋 Chi phí <span id="expMonthTag" class="tag"></span></h2>
+        <div class="table-wrap">
+          <table id="expenseTable">
+            <thead>
+              <tr><th>Ngày</th><th>Loại</th><th>Ghi chú</th><th style="text-align:right">Số tiền</th><th></th></tr>
+            </thead>
+            <tbody id="expenseBody"></tbody>
+            <tfoot id="expenseFoot"></tfoot>
+          </table>
+        </div>
+        <p id="expenseEmpty" class="empty-state">Chưa có chi phí nào trong tháng này.</p>
+      </div>
+    </section>
+
+    <section id="tab-utilities" class="tab-panel">
+      <div class="card">
+        <h2>💡 Điện nước tháng này</h2>
+        <div class="util-grid">
+          <div class="field">
+            <label>Số điện tiêu thụ (kWh)</label>
+            <input type="text" id="utilElecKwh" placeholder="vd: 320">
+          </div>
+          <div class="field">
+            <label>Giá tiền / kWh</label>
+            <input type="text" id="utilElecPrice" placeholder="vd: 3.5k hoặc 3500">
+          </div>
+          <div class="field">
+            <label>Số nước tiêu thụ (khối / m³)</label>
+            <input type="text" id="utilWaterM3" placeholder="vd: 18">
+          </div>
+          <div class="field">
+            <label>Giá tiền / khối</label>
+            <input type="text" id="utilWaterPrice" placeholder="vd: 15k hoặc 15000">
+          </div>
+        </div>
+        <button id="saveUtilBtn" class="btn-primary" style="margin-top:12px;">Lưu điện nước tháng này</button>
+        <div class="util-result">
+          <div class="row"><span>Tiền điện</span><span class="v" id="utilElecCost">0đ</span></div>
+          <div class="row"><span>Tiền nước</span><span class="v" id="utilWaterCost">0đ</span></div>
+          <div class="row tot"><span>Tổng điện nước (tính vào chi phí)</span><span class="v" id="utilTotal">0đ</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>💰 Quỹ đầu kỳ / cuối kỳ</h2>
+        <div class="field">
+          <label>Số dư quỹ đầu kỳ (tiền mặt + ngân hàng còn lại đầu tháng)</label>
+          <input type="text" id="utilOpening" placeholder="vd: 2tr7 hoặc 2710252">
+        </div>
+        <button id="saveOpeningBtn" class="btn-primary" style="margin-top:12px;">Lưu số dư đầu kỳ</button>
+        <div class="util-result">
+          <div class="row"><span>Số dư đầu kỳ</span><span class="v" id="fundOpening">0đ</span></div>
+          <div class="row"><span>+ Doanh thu tháng</span><span class="v" id="fundRevenue">0đ</span></div>
+          <div class="row"><span>− Chi phí tháng (kể cả điện nước)</span><span class="v" id="fundExpense">0đ</span></div>
+          <div class="row tot"><span>Số dư quỹ cuối kỳ</span><span class="v" id="fundClosing">0đ</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-summary" class="tab-panel">
+      <div class="receipt">
+        <div class="receipt-perf"></div>
+        <div class="receipt-inner">
+          <div class="receipt-title">TỔNG KẾT THÁNG</div>
+          <div class="receipt-sub" id="summaryMonthLabel">—</div>
+
+          <div class="receipt-row"><span class="label">Số dư đầu kỳ</span><span class="value" id="sumOpening">0đ</span></div>
+          <div class="receipt-row"><span class="label">Tiền mặt</span><span class="value cash-col" id="sumCash">0đ</span></div>
+          <div class="receipt-row"><span class="label">Chuyển khoản</span><span class="value transfer-col" id="sumTransfer">0đ</span></div>
+
+          <div class="bar-compare" id="barCompare">
+            <div class="bar-cash" style="width:50%"></div>
+            <div class="bar-transfer" style="width:50%"></div>
+          </div>
+          <div class="legend">
+            <span><i class="dot" style="background:var(--primary)"></i>Tiền mặt</span>
+            <span><i class="dot" style="background:var(--accent)"></i>Chuyển khoản</span>
+          </div>
+
+          <div class="receipt-row big total">
+            <span class="label">Tổng doanh thu</span>
+            <span class="value" id="sumRevenue">0đ</span>
+          </div>
+          <div class="receipt-row"><span class="label">Số đơn / khách</span><span class="value" id="sumOrders">0</span></div>
+          <div class="receipt-row"><span class="label">Doanh thu trung bình / đơn</span><span class="value" id="sumAvgOrder">0đ</span></div>
+
+          <hr class="receipt-divider">
+
+          <div id="sumCatBreakdown"></div>
+          <div class="cat-row"><span>Điện nước</span><span class="amt" id="sumUtilCost">0đ</span></div>
+          <div class="receipt-row total">
+            <span class="label">Tổng chi phí</span>
+            <span class="value" style="color:var(--danger)" id="sumExpense">0đ</span>
+          </div>
+
+          <hr class="receipt-divider">
+
+          <div class="receipt-row total" id="sumProfitRow">
+            <span class="label">LỢI NHUẬN</span>
+            <span class="value" id="sumProfit">0đ</span>
+          </div>
+          <div class="receipt-row"><span class="label">Số dư quỹ cuối kỳ</span><span class="value" id="sumClosing">0đ</span></div>
+        </div>
+      </div>
+      <div class="export-bar">
+        <button id="exportBtn" class="btn-secondary">⬇ Xuất Excel tháng này</button>
+      </div>
+    </section>
+
+    <section id="tab-trend" class="tab-panel">
+      <div class="card">
+        <h2>📈 Xu hướng doanh thu & lợi nhuận</h2>
+        <div class="legend-row">
+          <span><i class="dot" style="background:var(--primary)"></i>Doanh thu</span>
+          <span><i class="dot" style="background:var(--danger)"></i>Chi phí</span>
+          <span><i class="dot" style="background:var(--accent-dark)"></i>Lợi nhuận</span>
+        </div>
+        <div class="trend-svg-wrap" id="trendChartWrap"></div>
+        <p id="trendEmpty" class="empty-state">Chưa có đủ dữ liệu để vẽ xu hướng.</p>
+        <div class="table-wrap trend-table">
+          <table id="trendTable" style="display:none;">
+            <thead><tr><th>Tháng</th><th style="text-align:right">Doanh thu</th><th style="text-align:right">Chi phí</th><th style="text-align:right">Lợi nhuận</th></tr></thead>
+            <tbody id="trendBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="toast" id="toast">
+  <span id="toastMsg"></span>
+  <button id="toastUndo">Hoàn tác</button>
+</div>
+
+<script>
+(function(){
+  var state = { revenue: [], expense: [], monthMeta: {} };
+  var currentMonth = new Date().toISOString().slice(0,7);
+  var storageReady = (typeof window.storage !== 'undefined');
+
+  function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+
+  function parseVND(input){
+    if(!input) return 0;
+    var s = input.toString().trim().toLowerCase().replace(/\s+/g,'');
+    if(!s) return 0;
+    s = s.replace(/đ|vnd/g,'');
+    s = s.replace(/,/g,'.');
+    var m = s.match(/^(\d+(?:\.\d+)?)tr(\d+)?$/);
+    if(m){
+      var base = parseFloat(m[1]);
+      var frac = m[2] ? parseFloat('0.'+m[2]) : 0;
+      return Math.round((base+frac)*1000000);
+    }
+    m = s.match(/^(\d+(?:\.\d+)?)k$/);
+    if(m){ return Math.round(parseFloat(m[1])*1000); }
+    m = s.match(/^(\d+(?:\.\d+)?)m$/);
+    if(m){ return Math.round(parseFloat(m[1])*1000000); }
+    if(/^\d+(\.\d{3})+$/.test(s)){ s = s.replace(/\./g,''); }
+    var n = parseFloat(s);
+    return isNaN(n) ? 0 : Math.round(n);
+  }
+
+  function parseNum(input){
+    if(!input) return 0;
+    var s = input.toString().trim().replace(/,/g,'.');
+    var n = parseFloat(s);
+    return isNaN(n) ? 0 : n;
+  }
+
+  function formatVND(n){
+    n = Math.round(n || 0);
+    return n.toLocaleString('vi-VN') + 'đ';
+  }
+
+  function formatDateVN(iso){
+    var d = new Date(iso + 'T00:00:00');
+    if(isNaN(d)) return iso;
+    var days = ['CN','T2','T3','T4','T5','T6','T7'];
+    return days[d.getDay()] + ', ' + String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0');
+  }
+
+  function monthLabel(ym){
+    var parts = ym.split('-');
+    return 'Tháng ' + parseInt(parts[1],10) + '/' + parts[0];
+  }
+  function monthLabelShort(ym){
+    var parts = ym.split('-');
+    return 'T' + parseInt(parts[1],10) + '/' + parts[0].slice(2);
+  }
+
+  function todayISO(){ return new Date().toISOString().slice(0,10); }
+
+  function getMeta(ym){
+    return state.monthMeta[ym] || { opening:0, elecKwh:0, elecPrice:0, waterM3:0, waterPrice:0 };
+  }
+
+  function loadData(){
+    var p1 = storageReady ? window.storage.get('revenue_entries').catch(function(){ return null; }) : Promise.resolve(null);
+    var p2 = storageReady ? window.storage.get('expense_entries').catch(function(){ return null; }) : Promise.resolve(null);
+    var p3 = storageReady ? window.storage.get('month_meta').catch(function(){ return null; }) : Promise.resolve(null);
+    return Promise.all([p1,p2,p3]).then(function(res){
+      try{ state.revenue = res[0] ? JSON.parse(res[0].value) : []; }catch(e){ state.revenue = []; }
+      try{ state.expense = res[1] ? JSON.parse(res[1].value) : []; }catch(e){ state.expense = []; }
+      try{ state.monthMeta = res[2] ? JSON.parse(res[2].value) : {}; }catch(e){ state.monthMeta = {}; }
+    });
+  }
+  function saveRevenue(){
+    if(!storageReady) return Promise.resolve();
+    return window.storage.set('revenue_entries', JSON.stringify(state.revenue), false).catch(function(){});
+  }
+  function saveExpense(){
+    if(!storageReady) return Promise.resolve();
+    return window.storage.set('expense_entries', JSON.stringify(state.expense), false).catch(function(){});
+  }
+  function saveMeta(){
+    if(!storageReady) return Promise.resolve();
+    return window.storage.set('month_meta', JSON.stringify(state.monthMeta), false).catch(function(){});
+  }
+
+  var toastTimer = null;
+  function showToast(msg, onUndo){
+    var toast = document.getElementById('toast');
+    var undoBtn = document.getElementById('toastUndo');
+    document.getElementById('toastMsg').textContent = msg;
+    undoBtn.style.display = onUndo ? 'inline-block' : 'none';
+    toast.classList.add('show');
+    undoBtn.onclick = function(){
+      toast.classList.remove('show');
+      clearTimeout(toastTimer);
+      if(onUndo) onUndo();
+    };
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 4000);
+  }
+
+  function escapeHtml(s){
+    var div = document.createElement('div');
+    div.textContent = s;
+    return div.innerHTML;
+  }
+
+  function monthOf(iso){ return (iso || '').slice(0,7); }
+
+  function computeMonthStats(ym){
+    var revItems = state.revenue.filter(function(r){ return monthOf(r.date) === ym; });
+    var expItems = state.expense.filter(function(e){ return monthOf(e.date) === ym; });
+    var meta = getMeta(ym);
+
+    var totalCash = revItems.reduce(function(s,r){ return s + r.cash; }, 0);
+    var totalTransfer = revItems.reduce(function(s,r){ return s + r.transfer; }, 0);
+    var totalRevenue = totalCash + totalTransfer;
+    var totalOrders = revItems.reduce(function(s,r){ return s + (r.orders||0); }, 0);
+    var avgOrder = totalOrders > 0 ? totalRevenue/totalOrders : 0;
+
+    var catExpense = expItems.reduce(function(s,e){ return s + e.amount; }, 0);
+    var elecCost = (meta.elecKwh||0) * (meta.elecPrice||0);
+    var waterCost = (meta.waterM3||0) * (meta.waterPrice||0);
+    var utilCost = elecCost + waterCost;
+    var totalExpense = catExpense + utilCost;
+
+    var profit = totalRevenue - totalExpense;
+    var opening = meta.opening || 0;
+    var closing = opening + totalRevenue - totalExpense;
+
+    var byCat = {};
+    expItems.forEach(function(e){ byCat[e.category] = (byCat[e.category]||0) + e.amount; });
+
+    return {
+      revItems: revItems, expItems: expItems, meta: meta,
+      totalCash: totalCash, totalTransfer: totalTransfer, totalRevenue: totalRevenue,
+      totalOrders: totalOrders, avgOrder: avgOrder,
+      catExpense: catExpense, elecCost: elecCost, waterCost: waterCost, utilCost: utilCost,
+      totalExpense: totalExpense, profit: profit, opening: opening, closing: closing, byCat: byCat
+    };
+  }
+
+  function renderMonthLabels(){
+    document.getElementById('monthLabel').textContent = monthLabel(currentMonth);
+    document.getElementById('summaryMonthLabel').textContent = monthLabel(currentMonth);
+    document.getElementById('revMonthTag').textContent = monthLabel(currentMonth);
+    document.getElementById('expMonthTag').textContent = monthLabel(currentMonth);
+  }
+
+  function renderRevenueTable(){
+    var body = document.getElementById('revenueBody');
+    var foot = document.getElementById('revenueFoot');
+    var empty = document.getElementById('revenueEmpty');
+    var items = state.revenue.filter(function(r){ return monthOf(r.date) === currentMonth; })
+      .sort(function(a,b){ return b.date.localeCompare(a.date); });
+
+    body.innerHTML = '';
+    if(items.length === 0){
+      empty.style.display = 'block';
+      document.getElementById('revenueTable').style.display = 'none';
+      return;
+    }
+    empty.style.display = 'none';
+    document.getElementById('revenueTable').style.display = 'table';
+
+    var totalCash = 0, totalTransfer = 0, totalOrders = 0;
+    items.forEach(function(r){
+      totalCash += r.cash; totalTransfer += r.transfer; totalOrders += (r.orders||0);
+      var tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td>' + formatDateVN(r.date) + '</td>' +
+        '<td class="num">' + (r.orders||0) + '</td>' +
+        '<td class="note-col">' + (r.note ? escapeHtml(r.note) : '—') + '</td>' +
+        '<td class="num cash-col">' + formatVND(r.cash) + '</td>' +
+        '<td class="num transfer-col">' + formatVND(r.transfer) + '</td>' +
+        '<td><button class="del-btn" data-id="' + r.id + '" title="Xoá">✕</button></td>';
+      body.appendChild(tr);
+    });
+    foot.innerHTML = '<tr><td>Tổng</td>' +
+      '<td class="num">' + totalOrders + '</td><td></td>' +
+      '<td class="num cash-col">' + formatVND(totalCash) + '</td>' +
+      '<td class="num transfer-col">' + formatVND(totalTransfer) + '</td><td></td></tr>';
+
+    body.querySelectorAll('.del-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){ deleteRevenue(btn.getAttribute('data-id')); });
+    });
+  }
+
+  function renderExpenseTable(){
+    var body = document.getElementById('expenseBody');
+    var foot = document.getElementById('expenseFoot');
+    var empty = document.getElementById('expenseEmpty');
+    var items = state.expense.filter(function(e){ return monthOf(e.date) === currentMonth; })
+      .sort(function(a,b){ return b.date.localeCompare(a.date); });
+
+    body.innerHTML = '';
+    if(items.length === 0){
+      empty.style.display = 'block';
+      document.getElementById('expenseTable').style.display = 'none';
+      return;
+    }
+    empty.style.display = 'none';
+    document.getElementById('expenseTable').style.display = 'table';
+
+    var total = 0;
+    items.forEach(function(e){
+      total += e.amount;
+      var tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td>' + formatDateVN(e.date) + '</td>' +
+        '<td><span class="tag">' + escapeHtml(e.category) + '</span></td>' +
+        '<td class="note-col">' + (e.note ? escapeHtml(e.note) : '—') + '</td>' +
+        '<td class="num" style="color:var(--danger)">' + formatVND(e.amount) + '</td>' +
+        '<td><button class="del-btn" data-id="' + e.id + '" title="Xoá">✕</button></td>';
+      body.appendChild(tr);
+    });
+    foot.innerHTML = '<tr><td colspan="3">Tổng</td>' +
+      '<td class="num" style="color:var(--danger)">' + formatVND(total) + '</td><td></td></tr>';
+
+    body.querySelectorAll('.del-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){ deleteExpense(btn.getAttribute('data-id')); });
+    });
+  }
+
+  function renderUtilities(){
+    var meta = getMeta(currentMonth);
+    document.getElementById('utilElecKwh').value = meta.elecKwh || '';
+    document.getElementById('utilElecPrice').value = meta.elecPrice || '';
+    document.getElementById('utilWaterM3').value = meta.waterM3 || '';
+    document.getElementById('utilWaterPrice').value = meta.waterPrice || '';
+    document.getElementById('utilOpening').value = meta.opening || '';
+
+    var stats = computeMonthStats(currentMonth);
+    document.getElementById('utilElecCost').textContent = formatVND(stats.elecCost);
+    document.getElementById('utilWaterCost').textContent = formatVND(stats.waterCost);
+    document.getElementById('utilTotal').textContent = formatVND(stats.utilCost);
+
+    document.getElementById('fundOpening').textContent = formatVND(stats.opening);
+    document.getElementById('fundRevenue').textContent = '+ ' + formatVND(stats.totalRevenue);
+    document.getElementById('fundExpense').textContent = '− ' + formatVND(stats.totalExpense);
+    document.getElementById('fundClosing').textContent = formatVND(stats.closing);
+  }
+
+  function renderSummary(){
+    var stats = computeMonthStats(currentMonth);
+
+    document.getElementById('sumOpening').textContent = formatVND(stats.opening);
+    document.getElementById('sumCash').textContent = formatVND(stats.totalCash);
+    document.getElementById('sumTransfer').textContent = formatVND(stats.totalTransfer);
+    document.getElementById('sumRevenue').textContent = formatVND(stats.totalRevenue);
+    document.getElementById('sumOrders').textContent = stats.totalOrders;
+    document.getElementById('sumAvgOrder').textContent = formatVND(stats.avgOrder);
+    document.getElementById('sumUtilCost').textContent = formatVND(stats.utilCost);
+    document.getElementById('sumExpense').textContent = formatVND(stats.totalExpense);
+    document.getElementById('sumClosing').textContent = formatVND(stats.closing);
+
+    var cashPct = stats.totalRevenue > 0 ? (stats.totalCash/stats.totalRevenue*100) : 50;
+    document.querySelector('#barCompare .bar-cash').style.width = cashPct + '%';
+    document.querySelector('#barCompare .bar-transfer').style.width = (100-cashPct) + '%';
+
+    var catHtml = '';
+    Object.keys(stats.byCat).sort(function(a,b){ return stats.byCat[b]-stats.byCat[a]; }).forEach(function(cat){
+      catHtml += '<div class="cat-row"><span>' + escapeHtml(cat) + '</span><span class="amt">' + formatVND(stats.byCat[cat]) + '</span></div>';
+    });
+    document.getElementById('sumCatBreakdown').innerHTML = catHtml;
+
+    var profitRow = document.getElementById('sumProfitRow');
+    profitRow.classList.remove('profit-pos','profit-neg');
+    profitRow.classList.add(stats.profit >= 0 ? 'profit-pos' : 'profit-neg');
+    document.getElementById('sumProfit').textContent = (stats.profit >= 0 ? '' : '-') + formatVND(Math.abs(stats.profit));
+  }
+
+  function getAllMonthsWithData(){
+    var set = {};
+    state.revenue.forEach(function(r){ set[monthOf(r.date)] = true; });
+    state.expense.forEach(function(e){ set[monthOf(e.date)] = true; });
+    Object.keys(state.monthMeta).forEach(function(ym){ set[ym] = true; });
+    set[currentMonth] = true;
+    return Object.keys(set).sort();
+  }
+
+  function renderTrend(){
+    var months = getAllMonthsWithData();
+    months = months.slice(Math.max(0, months.length - 12));
+    var wrap = document.getElementById('trendChartWrap');
+    var empty = document.getElementById('trendEmpty');
+    var table = document.getElementById('trendTable');
+    var tbody = document.getElementById('trendBody');
+
+    if(months.length === 0){
+      wrap.innerHTML = ''; empty.style.display='block'; table.style.display='none';
+      return;
+    }
+    empty.style.display='none'; table.style.display='table';
+
+    var data = months.map(function(ym){
+      var s = computeMonthStats(ym);
+      return { ym: ym, revenue: s.totalRevenue, expense: s.totalExpense, profit: s.profit };
+    });
+
+    var maxVal = 1;
+    data.forEach(function(d){ maxVal = Math.max(maxVal, d.revenue, d.expense, Math.abs(d.profit)); });
+
+    var slotW = 64, chartH = 200, padTop = 16, padBottom = 34, barW = 16, gap = 6;
+    var W = data.length * slotW + 20;
+    var H = chartH + padTop + padBottom;
+
+    function y(v){ return padTop + (chartH - (v/maxVal)*chartH); }
+
+    var bars = '';
+    data.forEach(function(d, i){
+      var cx = 20 + i*slotW + slotW/2;
+      var xRev = cx - barW - gap/2;
+      var xExp = cx + gap/2;
+      var yRev = y(d.revenue), yExp = y(d.expense);
+      bars += '<rect x="'+xRev+'" y="'+yRev+'" width="'+barW+'" height="'+(padTop+chartH-yRev)+'" rx="3" fill="var(--primary)"></rect>';
+      bars += '<rect x="'+xExp+'" y="'+yExp+'" width="'+barW+'" height="'+(padTop+chartH-yExp)+'" rx="3" fill="var(--danger)"></rect>';
+      bars += '<text x="'+cx+'" y="'+(padTop+chartH+18)+'" text-anchor="middle" font-size="10.5" fill="var(--ink-soft)" font-family="Be Vietnam Pro, sans-serif">'+monthLabelShort(d.ym)+'</text>';
+    });
+
+    var lineColor = 'var(--accent-dark)';
+    var polyPts = data.map(function(d,i){
+      var cx = 20 + i*slotW + slotW/2;
+      var v = Math.max(0, Math.min(maxVal, d.profit));
+      return cx + ',' + y(v);
+    }).join(' ');
+    var dots = data.map(function(d,i){
+      var cx = 20 + i*slotW + slotW/2;
+      var v = Math.max(0, Math.min(maxVal, d.profit));
+      return '<circle cx="'+cx+'" cy="'+y(v)+'" r="3.5" fill="'+lineColor+'"></circle>';
+    }).join('');
+
+    var svg = '<svg viewBox="0 0 '+W+' '+H+'" width="'+Math.max(W,300)+'" height="'+H+'" xmlns="http://www.w3.org/2000/svg">' +
+      '<line x1="10" y1="'+(padTop+chartH)+'" x2="'+(W-10)+'" y2="'+(padTop+chartH)+'" stroke="var(--line)" stroke-width="1.5"></line>' +
+      bars +
+      '<polyline points="'+polyPts+'" fill="none" stroke="'+lineColor+'" stroke-width="2.5"></polyline>' +
+      dots +
+      '</svg>';
+    wrap.innerHTML = svg;
+
+    tbody.innerHTML = '';
+    data.slice().reverse().forEach(function(d){
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + monthLabel(d.ym) + '</td>' +
+        '<td class="num cash-col">' + formatVND(d.revenue) + '</td>' +
+        '<td class="num" style="color:var(--danger)">' + formatVND(d.expense) + '</td>' +
+        '<td class="num" style="color:' + (d.profit>=0?'var(--success)':'var(--danger)') + '">' + (d.profit>=0?'':'-') + formatVND(Math.abs(d.profit)) + '</td>';
+      tbody.appendChild(tr);
+    });
+  }
+
+  function renderAll(){
+    renderMonthLabels();
+    renderRevenueTable();
+    renderExpenseTable();
+    renderUtilities();
+    renderSummary();
+    renderTrend();
+  }
+
+  function addRevenue(date, cash, transfer, orders, note){
+    state.revenue.push({ id: uid(), date: date, cash: cash, transfer: transfer, orders: orders, note: note });
+    saveRevenue().then(renderAll);
+  }
+  function deleteRevenue(id){
+    var idx = state.revenue.findIndex(function(r){ return r.id === id; });
+    if(idx === -1) return;
+    var removed = state.revenue[idx];
+    state.revenue.splice(idx,1);
+    saveRevenue().then(renderAll);
+    showToast('Đã xoá doanh thu ' + formatDateVN(removed.date), function(){
+      state.revenue.push(removed);
+      saveRevenue().then(renderAll);
+    });
+  }
+  function addExpense(date, category, amount, note){
+    state.expense.push({ id: uid(), date: date, category: category, amount: amount, note: note });
+    saveExpense().then(renderAll);
+  }
+  function deleteExpense(id){
+    var idx = state.expense.findIndex(function(e){ return e.id === id; });
+    if(idx === -1) return;
+    var removed = state.expense[idx];
+    state.expense.splice(idx,1);
+    saveExpense().then(renderAll);
+    showToast('Đã xoá chi phí ' + escapeHtml(removed.category), function(){
+      state.expense.push(removed);
+      saveExpense().then(renderAll);
+    });
+  }
+  function updateMeta(ym, patch){
+    var meta = getMeta(ym);
+    var updated = Object.assign({}, meta, patch);
+    state.monthMeta[ym] = updated;
+    saveMeta().then(renderAll);
+  }
+
+  document.querySelectorAll('.tab-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+      document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.getAttribute('data-tab')).classList.add('active');
+    });
+  });
+
+  document.getElementById('prevMonth').addEventListener('click', function(){
+    var d = new Date(currentMonth + '-01T00:00:00');
+    d.setMonth(d.getMonth() - 1);
+    currentMonth = d.toISOString().slice(0,7);
+    renderAll();
+  });
+  document.getElementById('nextMonth').addEventListener('click', function(){
+    var d = new Date(currentMonth + '-01T00:00:00');
+    d.setMonth(d.getMonth() + 1);
+    currentMonth = d.toISOString().slice(0,7);
+    renderAll();
+  });
+
+  document.getElementById('revenueForm').addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var date = document.getElementById('revDate').value || todayISO();
+    var cash = parseVND(document.getElementById('revCash').value);
+    var transfer = parseVND(document.getElementById('revTransfer').value);
+    var orders = Math.round(parseNum(document.getElementById('revOrders').value));
+    var note = document.getElementById('revNote').value.trim();
+    if(cash === 0 && transfer === 0){ showToast('Nhập tiền mặt hoặc chuyển khoản trước đã nhé'); return; }
+    addRevenue(date, cash, transfer, orders, note);
+    if(monthOf(date) !== currentMonth){ currentMonth = monthOf(date); }
+    this.reset();
+    document.getElementById('revDate').value = todayISO();
+    showToast('Đã lưu doanh thu ' + formatDateVN(date));
+  });
+
+  document.getElementById('expenseForm').addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var date = document.getElementById('expDate').value || todayISO();
+    var category = document.getElementById('expCategory').value;
+    var amount = parseVND(document.getElementById('expAmount').value);
+    var note = document.getElementById('expNote').value.trim();
+    if(amount === 0){ showToast('Nhập số tiền chi phí trước đã nhé'); return; }
+    addExpense(date, category, amount, note);
+    if(monthOf(date) !== currentMonth){ currentMonth = monthOf(date); }
+    this.reset();
+    document.getElementById('expDate').value = todayISO();
+    showToast('Đã lưu chi phí');
+  });
+
+  document.getElementById('saveUtilBtn').addEventListener('click', function(){
+    var elecKwh = parseNum(document.getElementById('utilElecKwh').value);
+    var elecPrice = parseVND(document.getElementById('utilElecPrice').value);
+    var waterM3 = parseNum(document.getElementById('utilWaterM3').value);
+    var waterPrice = parseVND(document.getElementById('utilWaterPrice').value);
+    updateMeta(currentMonth, { elecKwh: elecKwh, elecPrice: elecPrice, waterM3: waterM3, waterPrice: waterPrice });
+    showToast('Đã lưu điện nước ' + monthLabel(currentMonth));
+  });
+
+  document.getElementById('saveOpeningBtn').addEventListener('click', function(){
+    var opening = parseVND(document.getElementById('utilOpening').value);
+    updateMeta(currentMonth, { opening: opening });
+    showToast('Đã lưu số dư đầu kỳ');
+  });
+
+  document.getElementById('exportBtn').addEventListener('click', function(){
+    if(typeof XLSX === 'undefined'){ showToast('Không tải được thư viện Excel, thử lại sau nhé'); return; }
+    var stats = computeMonthStats(currentMonth);
+    var wb = XLSX.utils.book_new();
+
+    var revRows = [['Ngày','Số đơn','Tiền mặt','Chuyển khoản','Tổng','Ghi chú']];
+    stats.revItems.slice().sort(function(a,b){ return a.date.localeCompare(b.date); }).forEach(function(r){
+      revRows.push([r.date, r.orders||0, r.cash, r.transfer, r.cash+r.transfer, r.note||'']);
+    });
+    revRows.push(['Tổng', stats.totalOrders, stats.totalCash, stats.totalTransfer, stats.totalRevenue, '']);
+    var wsRev = XLSX.utils.aoa_to_sheet(revRows);
+    XLSX.utils.book_append_sheet(wb, wsRev, 'Doanh thu');
+
+    var expRows = [['Ngày','Loại','Số tiền','Ghi chú']];
+    stats.expItems.slice().sort(function(a,b){ return a.date.localeCompare(b.date); }).forEach(function(e){
+      expRows.push([e.date, e.category, e.amount, e.note||'']);
+    });
+    expRows.push(['Điện', '', stats.elecCost, stats.meta.elecKwh+' kWh x '+stats.meta.elecPrice+'đ']);
+    expRows.push(['Nước', '', stats.waterCost, stats.meta.waterM3+' khối x '+stats.meta.waterPrice+'đ']);
+    expRows.push(['Tổng chi phí', '', stats.totalExpense, '']);
+    var wsExp = XLSX.utils.aoa_to_sheet(expRows);
+    XLSX.utils.book_append_sheet(wb, wsExp, 'Chi phí');
+
+    var sumRows = [
+      ['Tháng', monthLabel(currentMonth)],
+      ['Số dư đầu kỳ', stats.opening],
+      ['Tổng tiền mặt', stats.totalCash],
+      ['Tổng chuyển khoản', stats.totalTransfer],
+      ['Tổng doanh thu', stats.totalRevenue],
+      ['Tổng số đơn', stats.totalOrders],
+      ['Doanh thu TB / đơn', Math.round(stats.avgOrder)],
+      ['Tổng chi phí (kể cả điện nước)', stats.totalExpense],
+      ['Lợi nhuận', stats.profit],
+      ['Số dư quỹ cuối kỳ', stats.closing]
+    ];
+    var wsSum = XLSX.utils.aoa_to_sheet(sumRows);
+    XLSX.utils.book_append_sheet(wb, wsSum, 'Tổng kết');
+
+    XLSX.writeFile(wb, 'hana_laundry_' + currentMonth + '.xlsx');
+    showToast('Đã xuất file Excel');
+  });
+
+  document.getElementById('revDate').value = todayISO();
+  document.getElementById('expDate').value = todayISO();
+
+  loadData().then(renderAll).catch(function(){ renderAll(); });
+})();
+</script>
+</body>
+</html>
