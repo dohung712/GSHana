@@ -147,17 +147,39 @@ details.rmpanel summary{font-size:.9rem;}
 .rpt .rcap{text-align:center;font-weight:600;font-size:12px;margin-bottom:4px;}
 .sbar{height:9px;background:var(--line);border-radius:5px;overflow:hidden;}
 .sbar i{display:block;height:100%;background:var(--accent);width:0;}
+#fengPanel select,#fengPanel input[type=number]{width:100%;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:inherit;}
+#placeCheck select{padding:3px 6px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:inherit;}
 
-.chatFab{position:fixed;right:16px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:150;background:var(--accent);color:#fff;border:none;border-radius:28px;padding:12px 18px;font-weight:600;box-shadow:0 4px 16px rgba(0,0,0,.25);cursor:pointer}
-.chatBox{position:fixed;right:12px;bottom:calc(74px + env(safe-area-inset-bottom,0px));width:min(380px,calc(100% - 24px));height:min(520px,70%);z-index:150;background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 28px rgba(0,0,0,.28);display:none;flex-direction:column;overflow:hidden}
-.chatBox.show{display:flex}
-.chatHead{padding:10px 14px;font-weight:700;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;font-size:.9rem}
-.chatLog{flex:1;overflow:auto;padding:10px;display:flex;flex-direction:column;gap:8px;font-size:.84rem;line-height:1.5}
-.msg{max-width:92%;padding:8px 11px;border-radius:12px;word-break:break-word}
-.msg.u{align-self:flex-end;background:var(--accent);color:#fff}.msg.b{align-self:flex-start;background:var(--corridor)}
-.msg ul{margin:4px 0 0;padding-left:18px}
-.chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 10px 6px}.chips button{font-size:.72rem;padding:4px 9px;border-radius:14px}
-.chatIn{display:flex;gap:6px;padding:8px;border-top:1px solid var(--line)}.chatIn input{flex:1;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:inherit;font-size:.85rem}
+#fgRoot .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-width:420px;margin:8px auto}
+#fgRoot .cell{min-height:92px;border:1px solid var(--line);border-radius:10px;padding:4px;display:flex;flex-wrap:wrap;gap:4px;align-content:flex-start;position:relative}
+#fgRoot .cell b{width:100%;font-size:.7rem;color:var(--muted);font-weight:600}
+#fgRoot .cell.g{background:rgba(95,150,110,.16)} #fgRoot .cell.r{background:rgba(200,80,70,.16)} #fgRoot .cell.c{background:rgba(160,160,160,.12)}
+#fgRoot .chip{touch-action:none;cursor:grab;user-select:none;font-size:.78rem;padding:4px 8px;border-radius:14px;background:var(--panel);border:1.5px solid var(--accent);color:var(--ink)}
+#fgRoot .chip.ok{border-color:#3f9a5f} #fgRoot .chip.warn{border-color:#d9a21b} #fgRoot .chip.bad{border-color:#d0463a}
+#fgRoot .tray{display:flex;gap:6px;flex-wrap:wrap;min-height:34px;padding:8px;border:1px dashed var(--line);border-radius:10px;justify-content:center}
+#fgRoot .res{font-size:.84rem;line-height:1.55;margin:0 0 10px}
+#fgRoot .res li{list-style:none;margin:2px 0}
+#fgRoot .res ul{padding:0;margin:4px 0 0}
+#fgRoot .src{font-size:.68rem;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:0 5px;margin-left:4px;white-space:nowrap}
+#fgRoot .front{text-align:center;font-size:.78rem;color:var(--sel);font-weight:600}
+#fgRoot ul.notes{padding-left:18px;font-size:.84rem;line-height:1.6} #fgRoot ul.notes li{margin-bottom:4px}
+.fgghost{position:fixed;z-index:999;pointer-events:none;font-size:.8rem;padding:4px 10px;border-radius:14px;background:var(--accent);color:#fff}
+#rtRoot table{width:100%;border-collapse:collapse;font-size:.82rem;margin:6px 0}
+#rtRoot th,#rtRoot td{border-bottom:1px solid var(--line);padding:6px 4px;text-align:right}
+#rtRoot th:first-child,#rtRoot td:first-child{text-align:left}
+#rtRoot .big{font-size:1.5rem;font-weight:700;color:var(--sel)}
+#rtRoot .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:8px 0}
+#rtRoot .kpi{border:1px solid var(--line);border-radius:10px;padding:8px;font-size:.78rem;color:var(--muted)}
+#rtRoot .kpi b{display:block;font-size:1.05rem;color:var(--ink)}
+#rtRoot .neg{color:#d0463a} #rtRoot .pos{color:#3f9a5f}
+#qtRoot .sc{overflow-x:auto}
+#qtRoot table{width:100%;border-collapse:collapse;font-size:.8rem;min-width:640px}
+#qtRoot th,#qtRoot td{border-bottom:1px solid var(--line);padding:5px 4px;text-align:right;vertical-align:top}
+#qtRoot td:nth-child(2),#qtRoot th:nth-child(2){text-align:left;min-width:170px}
+#qtRoot input[type=number]{width:92px;padding:4px 5px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:inherit;text-align:right}
+#qtRoot input.q{width:64px}
+#qtRoot .nt{font-size:.74rem;color:var(--muted);text-align:left;padding:2px 4px 8px}
+#qtRoot .tot td{font-weight:700}
 </style>
 </head>
 <body>
@@ -181,6 +203,9 @@ details.rmpanel summary{font-size:.9rem;}
     <button class="tabbtn" data-tab="summ">Tóm tắt</button>
     <button class="tabbtn" data-tab="cost">Chi phí</button>
     <button class="tabbtn" data-tab="repair">Sửa chữa</button>
+    <button class="tabbtn" data-tab="fengcheck">🧭 Phong thủy riêng</button>
+    <button class="tabbtn" data-tab="rental">💰 Cho thuê & hoàn vốn</button>
+    <button class="tabbtn" data-tab="quote">📑 Báo giá thầu</button>
     <button class="tabbtn" data-tab="export">Xuất PDF / ảnh</button>
   </div>
 
@@ -209,12 +234,33 @@ details.rmpanel summary{font-size:.9rem;}
         </div>
         <div class="readout" id="houseInfo" style="max-height:none;margin:0;"></div>
       </div>
-      <div class="itemPanel" id="backPanel" style="margin:0 0 12px;"></div>
+      <details class="itemPanel" id="fengPanel" style="margin:0 0 12px;" open>
+        <summary style="font-weight:600;font-size:.85rem;cursor:pointer;">Cung vị (bát quái) &amp; hướng tốt/xấu theo tuổi</summary>
+        <label class="expchk"><input type="checkbox" id="fengShow" checked> Hiện lưới 9 cung vị trên mặt bằng</label>
+        <label class="expchk"><input type="checkbox" id="fengMean" checked> Hiện ý nghĩa từng cung (sự nghiệp, tài lộc…)</label>
+        <div class="pgrid" style="grid-template-columns:1fr 1fr;margin-top:10px;">
+          <div class="field"><label>Gia chủ 1 – năm sinh</label><input type="number" id="fengY0" min="1900" max="2100" placeholder="vd 1990"></div>
+          <div class="field"><label>Giới tính</label><select id="fengS0"><option value="nam">Nam</option><option value="nu">Nữ</option></select></div>
+          <div class="field"><label>Gia chủ 2 – năm sinh</label><input type="number" id="fengY1" min="1900" max="2100" placeholder="vd 1992"></div>
+          <div class="field"><label>Giới tính</label><select id="fengS1"><option value="nam">Nam</option><option value="nu" selected>Nữ</option></select></div>
+        </div>
+        <div class="field"><label>Tô màu hướng tốt/xấu trên mặt bằng theo</label>
+          <select id="fengSel"><option value="-1">Không tô (chỉ hiện cung)</option><option value="0">Gia chủ 1</option><option value="1">Gia chủ 2</option></select></div>
+        <div class="readout" id="fengInfo" style="max-height:none;margin:8px 0;"></div>
+        <h3 style="font-size:.85rem;margin:10px 0 6px;">Từng khu vực / đồ dùng nằm ở cung nào</h3>
+        <div id="fengList"></div>
+        <details style="margin-top:10px;"><summary style="cursor:pointer;font-size:.82rem;">Ý nghĩa 9 cung và gợi ý bố trí</summary><div id="fengLegend" style="margin-top:8px;"></div></details>
+      </details>
       <div class="svgbox">
         <svg id="plan" viewBox="0 0 320 540" xmlns="http://www.w3.org/2000/svg">
-          <g id="shellLayer"></g>
-          <g id="blocksLayer"></g><g id="compassG"></g>
+          <g id="shellLayer"></g><g id="fengG" pointer-events="none"></g>
+          <g id="blocksLayer"></g><g id="fengBadgeG" pointer-events="none"></g><g id="compassG"></g>
         </svg>
+      </div>
+      <div class="itemPanel" id="placeCheck" style="margin:10px 0;">
+        <b style="font-size:.9rem;">Kiểm tra vị trí Bếp &amp; Nhà vệ sinh</b>
+        <label class="expchk"><input type="checkbox" id="fengHint" checked> Hiện gợi ý chỗ hợp trên mặt bằng (nhãn “Bếp ✓” / “NVS ✓”)</label>
+        <div id="placeCheckBody"></div>
       </div>
       <div class="legend">
         <span><span class="dot" style="background:var(--mezz);opacity:.4"></span>Gác A (tầng trên, mờ + nét đứt)</span>
@@ -361,12 +407,13 @@ details.rmpanel summary{font-size:.9rem;}
   <div class="tabpanel" id="tab-summ"><div id="summRoot"></div></div>
   <div class="tabpanel" id="tab-cost"><div id="costRoot"></div></div>
   <div class="tabpanel" id="tab-repair"><div id="repairRoot"></div></div>
+  <div class="tabpanel" id="tab-fengcheck"><div id="fgRoot"></div></div>
+  <div class="tabpanel" id="tab-rental"><div id="rtRoot"></div></div>
+  <div class="tabpanel" id="tab-quote"><div id="qtRoot"></div></div>
   <div class="tabpanel" id="tab-export"><div id="exportRoot"></div></div>
 </div>
 
 <div class="toast" id="toast"></div>
-<button class="chatFab" id="chatFab">💬 Hỏi chi phí</button>
-<div class="chatBox" id="chatBox"><div class="chatHead"><span>Trợ lý chi phí</span><span id="chatX" style="cursor:pointer">✕</span></div><div class="chatLog" id="chatLog"></div><div class="chips" id="chatChips"></div><div class="chatIn"><input id="chatIn" placeholder="VD: bồn cầu bao nhiêu tiền?" autocomplete="off"><button class="primary" id="chatSend">Gửi</button></div></div>
 
 <div class="modalOverlay" id="addModal">
   <div class="modalBox">
@@ -482,7 +529,7 @@ details.rmpanel summary{font-size:.9rem;}
     toastTimer=setTimeout(()=>toastEl.classList.remove('show'),2200);
   }
   function saveAll(){
-    save(); saveDesign(); saveTheme(); saveCost(); saveHouse(); saveRepair();
+    save(); saveDesign(); saveTheme(); saveCost(); saveHouse(); saveRepair(); saveFeng();
     bedroomEditors.forEach(ed=>ed.save());
     const t=new Date();
     showToast('Đã lưu lúc '+t.getHours().toString().padStart(2,'0')+':'+t.getMinutes().toString().padStart(2,'0')+':'+t.getSeconds().toString().padStart(2,'0'));
@@ -497,7 +544,11 @@ details.rmpanel summary{font-size:.9rem;}
       bedroomB: bedroomEditors[1] ? bedroomEditors[1].getItems() : [],
       cost: cost,
       house: houseData(),
-      repair: repair
+      repair: repair,
+      feng: feng,
+      fengcheck: window.__fengCheck?window.__fengCheck.get():null,
+      rental: window.__rental?window.__rental.get():null,
+      quote: window.__quote?window.__quote.get():null
     };
   }
   function exportAll(){
@@ -519,6 +570,10 @@ details.rmpanel summary{font-size:.9rem;}
         if(data.design){ Object.assign(design,data.design); saveDesign(); syncDesignInputs(); }
         if(data.theme){ applyTheme(data.theme,false); }
         if(data.house){ ['rw','cor','p1','pk'].forEach(k=>{ if(typeof data.house[k]==='number') house[k]=data.house[k]; }); saveHouse(); syncHouseInputs(); }
+        if(data.feng){ feng=mergeFeng(data.feng); saveFeng(); syncFengUI(); }
+        if(data.fengcheck&&window.__fengCheck) window.__fengCheck.set(data.fengcheck);
+        if(data.rental&&window.__rental) window.__rental.set(data.rental);
+        if(data.quote&&window.__quote) window.__quote.set(data.quote);
         if(data.repair){ repair=mergeRepair(defaultRepair(),data.repair); saveRepair(); }
         if(data.cost){ cost=mergeCost(defaultCost(),data.cost); saveCost(); }
         if(Array.isArray(data.bedroomA) && bedroomEditors[0]) bedroomEditors[0].setItems(data.bedroomA);
@@ -631,6 +686,9 @@ details.rmpanel summary{font-size:.9rem;}
     summ: document.getElementById('tab-summ'),
     cost: document.getElementById('tab-cost'),
     repair: document.getElementById('tab-repair'),
+    fengcheck: document.getElementById('tab-fengcheck'),
+    rental: document.getElementById('tab-rental'),
+    quote: document.getElementById('tab-quote'),
     export: document.getElementById('tab-export')
   };
   tabbtns.forEach(btn=>{
@@ -658,23 +716,23 @@ details.rmpanel summary{font-size:.9rem;}
      TAB 1: 2D FLOOR PLAN EDITOR (gác + đồ dùng — bếp/NVS cố định, tĩnh trong SVG, không có handler)
   ============================================================ */
   const SCALE=48, OX=20, OY=20;
-  const house={rw:4,cor:1,p1:5,pk:5, get W(){return this.rw+this.cor;}, get Dm(){return this.p1+this.pk;}, get bd(){ try{ return Math.max(0,...blocks.filter(b=>b.id==='rearA'||b.id==='rearB').map(b=>b.h)); }catch(e){ return 0; } }, get D(){return this.Dm+this.bd;}};
+  const house={rw:4,cor:1,p1:5,pk:5, get W(){return this.rw+this.cor;}, get D(){return this.p1+this.pk;}};
   try{ const hs=JSON.parse(localStorage.getItem('gac_house_dims_v1')||'null'); if(hs) ['rw','cor','p1','pk'].forEach(k=>{ if(typeof hs[k]==='number') house[k]=hs[k]; }); }catch(e){}
   function houseData(){ return {rw:house.rw,cor:house.cor,p1:house.p1,pk:house.pk}; }
   function saveHouse(){ try{ localStorage.setItem('gac_house_dims_v1',JSON.stringify(houseData())); }catch(e){} }
   function drawShell(){
-    const px=m=>m*SCALE, rw=house.rw, cor=house.cor, p1=house.p1, pk=house.pk, W=house.W, D=house.D, Dm=house.Dm;
+    const px=m=>m*SCALE, rw=house.rw, cor=house.cor, p1=house.p1, pk=house.pk, W=house.W, D=house.D;
     svg.setAttribute('viewBox','0 0 '+(OX*2+px(W)+62)+' '+(OY*2+px(D)));
     const winW=Math.min(1,rw-0.4), wx=(rw-winW)/2, dW=Math.min(1.5,rw), cdW=Math.min(0.9,cor);
     document.getElementById('shellLayer').innerHTML=
       '<rect x="'+OX+'" y="'+OY+'" width="'+px(W)+'" height="'+px(D)+'" fill="none" stroke="var(--ink)" stroke-width="2.5"/>'+
       '<rect x="'+OX+'" y="'+OY+'" width="'+px(rw)+'" height="'+px(p1)+'" fill="var(--room)" stroke="var(--line)"/>'+
-      '<rect x="'+(OX+px(rw))+'" y="'+OY+'" width="'+px(cor)+'" height="'+px(Dm)+'" fill="var(--corridor)" stroke="var(--line)"/>'+
+      '<rect x="'+(OX+px(rw))+'" y="'+OY+'" width="'+px(cor)+'" height="'+px(D)+'" fill="var(--corridor)" stroke="var(--line)"/>'+
       '<rect x="'+OX+'" y="'+(OY+px(p1))+'" width="'+px(rw)+'" height="'+px(pk)+'" fill="var(--room2)" stroke="var(--line)"/>'+
       '<rect x="'+(OX+px(wx))+'" y="'+OY+'" width="'+px(winW)+'" height="4" fill="var(--ink)"/>'+
       '<text x="'+(OX+px(rw)/2)+'" y="'+(OY+25)+'" text-anchor="middle" font-size="10" fill="var(--muted)">PHÒNG 1</text>'+
       '<text x="'+(OX+px(rw)/2)+'" y="'+(OY+px(p1)+25)+'" text-anchor="middle" font-size="10" fill="var(--muted)">PHÒNG KỀ</text>'+
-      '<text x="'+(OX+px(rw+cor/2))+'" y="'+(OY+px(Dm)/2)+'" text-anchor="middle" font-size="9" fill="var(--muted)" transform="rotate(90 '+(OX+px(rw+cor/2))+' '+(OY+px(Dm)/2)+')">LUỒNG</text>'+(D>Dm?'<line x1="'+OX+'" y1="'+(OY+px(Dm))+'" x2="'+(OX+px(W))+'" y2="'+(OY+px(Dm))+'" stroke="var(--ink)" stroke-width="2"/><text x="'+(OX+px(W)-4)+'" y="'+(OY+px(Dm)+11)+'" text-anchor="end" font-size="7" fill="var(--muted)">PHẦN PHÍA SAU</text>':'')+
+      '<text x="'+(OX+px(rw+cor/2))+'" y="'+(OY+px(D)/2)+'" text-anchor="middle" font-size="9" fill="var(--muted)" transform="rotate(90 '+(OX+px(rw+cor/2))+' '+(OY+px(D)/2)+')">LUỒNG</text>'+
       '<rect x="'+(OX+px(rw-dW))+'" y="'+(OY+px(p1)-7)+'" width="'+px(dW)+'" height="14" fill="var(--ink)" opacity=".18" stroke="var(--ink)" stroke-dasharray="3 2"/>'+
       '<text x="'+(OX+px(rw-dW/2))+'" y="'+(OY+px(p1)+3)+'" text-anchor="middle" font-size="7" fill="var(--ink)">Cửa '+dW.toFixed(1).replace('.',',')+'m</text>'+
       '<rect x="'+(OX+px(rw+(cor-cdW)/2))+'" y="'+(OY-2)+'" width="'+px(cdW)+'" height="5" fill="var(--sel)"/>'+
@@ -745,6 +803,7 @@ details.rmpanel summary{font-size:.9rem;}
 
   function render(){
     drawShell();
+    try{ drawFeng(); renderFengList(); }catch(e){}
     layer.innerHTML='';
     const ordered=blocks.slice().filter(b=> planView==='all' || (planView==='tret' && !isGacFloor(b)) || (planView==='gac' && isGacFloor(b))).sort((a,b)=> (a.type==='gac'?0:(a.type==='room'?1:2)) - (b.type==='gac'?0:(b.type==='room'?1:2)));
     ordered.forEach(b=>{
@@ -1074,10 +1133,9 @@ details.rmpanel summary{font-size:.9rem;}
       [W+wt,wallH,wt, W/2,wallH/2,D],
       [wt,wallH,D+wt, 0,wallH/2,D/2],
       [wt,wallH,D+wt, W,wallH/2,D/2],
-      [0.1,wallH,house.Dm, house.rw,wallH/2,house.Dm/2],
+      [0.1,wallH,D, house.rw,wallH/2,D/2],
       [house.rw,wallH,0.1, house.rw/2,wallH/2,house.p1]
     ];
-    if(D>house.Dm) wallDefs.push([W,wallH,0.1, W/2,wallH/2,house.Dm]);
     wallDefs.forEach(([bw,bh,bd,px,py,pz])=>{
       const m=new THREE.Mesh(new THREE.BoxGeometry(bw,bh,bd), wallMat.clone());
       m.position.set(px,py,pz); m.castShadow=true; m.receiveShadow=true;
@@ -1400,6 +1458,7 @@ details.rmpanel summary{font-size:.9rem;}
     document.getElementById('headingInfo').innerHTML=walls.map(w=>'<div><b>'+w[0]+'</b> ('+w[2]+'): hướng <b>'+bearingLabel(w[1])+'</b></div>').join('')+
       '<div style="margin-top:4px;">☀️ Nắng chiều (≈14–17h, hướng Tây – Tây Nam) chiếu vào: <b>'+(sunny.length? sunny.map(w=>w[0].toLowerCase()).join(', ') : 'không có mặt nào chính diện')+'</b> (nếu mặt đó là tường ngoài).</div>';
     drawCompass();
+    if(typeof drawFeng==='function'&&feng){ drawFeng(); renderFengList(); }
   }
   document.getElementById('inHeading').addEventListener('input',e=>{
     const v=parseFloat(e.target.value); if(!isFinite(v)) return;
@@ -1550,7 +1609,7 @@ details.rmpanel summary{font-size:.9rem;}
     const P=(w,h,a,t)=>({w:w,h:h,area:a,perim:2*(w+h),txt:t||dim(w,h)});
     if(id==='p1') return P(house.rw,house.p1,house.rw*house.p1);
     if(id==='pk') return P(house.rw,house.pk,house.rw*house.pk-nA,dim(house.rw,house.pk)+' − NVS');
-    if(id==='lg') return P(house.cor,house.Dm,house.cor*house.Dm);
+    if(id==='lg') return P(house.cor,house.D,house.cor*house.D);
     if(id==='nvs'&&nvs) return P(nvs.w,nvs.h,nvs.w*nvs.h);
     if(id==='gA'&&gA) return P(gA.w,gA.h,gA.w*gA.h);
     if(id==='gB'&&gB) return P(gB.w,gB.h,gB.w*gB.h);
@@ -1871,10 +1930,9 @@ details.rmpanel summary{font-size:.9rem;}
     [['inRW','rw'],['inCOR','cor'],['inP1','p1'],['inPK','pk']].forEach(d=>{
       const el=document.getElementById(d[0]); if(el && document.activeElement!==el) el.value=house[d[1]];
     });
-    document.getElementById('houseInfo').innerHTML='Tổng mặt bằng: <b>'+house.W.toFixed(1)+' × '+house.D.toFixed(1)+' m</b> = <b>'+(house.W*house.D).toFixed(1)+' m²</b> (Phòng 1 + Phòng kề + luồng'+(house.bd?' + phần phía sau':'')+').'; if(typeof renderBack==='function') renderBack();
+    document.getElementById('houseInfo').innerHTML='Tổng mặt bằng: <b>'+house.W.toFixed(1)+' × '+house.D.toFixed(1)+' m</b> = <b>'+(house.W*house.D).toFixed(1)+' m²</b> (Phòng 1 + Phòng kề + luồng).';
   }
   function fitBlocksToHouse(){
-    ['rearA','rearB'].forEach(id=>{ const r=byId(id); if(r){ r.y=house.Dm; r.w=Math.min(r.w,house.W); } });
     blocks.forEach(b=>{ b.w=Math.min(b.w,house.W); b.h=Math.min(b.h,house.D); b.x=Math.max(0,Math.min(b.x,house.W-b.w)); b.y=Math.max(0,Math.min(b.y,house.D-b.h)); });
     save();
   }
@@ -1888,41 +1946,6 @@ details.rmpanel summary{font-size:.9rem;}
     });
   });
   syncHouseInputs();
-
-  /* ===== PHẦN DIỆN TÍCH PHÍA SAU (2 phòng, tự chỉnh) ===== */
-  var REAR=[['rearA','Phòng sau 1','#e8d8b0'],['rearB','Phòng sau 2','#d9e6d0']];
-  function renderBack(){
-    const el=document.getElementById('backPanel'); if(!el||!REAR) return;
-    const escH=t=>String(t).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
-    const on=REAR.some(r=>byId(r[0]));
-    let h='<label class="checkrow" style="margin:0"><input type="checkbox" id="backOn"'+(on?' checked':'')+'><b>Thêm phần diện tích phía sau (2 phòng)</b></label>';
-    if(on){
-      h+='<div class="pgrid" style="grid-template-columns:repeat(3,1fr);margin-top:8px;font-size:.78rem">'+REAR.map(r=>{const b=byId(r[0]); if(!b) return '';
-        return '<div class="field"><label>Tên</label><input type="text" data-rear="'+r[0]+'" data-f="label" value="'+escH(b.label)+'" style="width:100%"></div><div class="field"><label>Rộng (m)</label><input type="number" min="1" max="12" step="0.1" data-rear="'+r[0]+'" data-f="w" value="'+b.w+'"></div><div class="field"><label>Dài (m)</label><input type="number" min="1" max="12" step="0.1" data-rear="'+r[0]+'" data-f="h" value="'+b.h+'"></div>';}).join('')+'</div>'+
-        '<div class="readout" style="max-height:none;margin:0">Diện tích phía sau: '+REAR.map(r=>{const b=byId(r[0]);return b?'<b>'+escH(b.label)+'</b> '+(b.w*b.h).toFixed(1)+' m²':'';}).join(' · ')+'. Chi phí từng phòng xem ở tab Chi phí / Sửa chữa.</div>';
-    }
-    el.innerHTML=h;
-  }
-  (function bindBack(){
-    const el=document.getElementById('backPanel');
-    el.addEventListener('change',e=>{
-      const t=e.target;
-      if(t.id==='backOn'){
-        if(t.checked){ REAR.forEach((r,i)=>{ if(!byId(r[0])) blocks.push({id:r[0],label:r[1],x:i?house.W/2:0,y:house.Dm,w:house.W/2,h:3,color:'var(--room2)',customColor:r[2],deletable:false,type:'room',floor:'tret',icon:'generic'}); }); showToast('Đã thêm 2 phòng phía sau — chỉnh kích thước ngay bên dưới'); }
-        else { REAR.forEach(r=>{ blocks=blocks.filter(b=>b.id!==r[0]); delete repair.rooms[r[0]]; delete cost.zones[r[0]]; }); saveRepair(); saveCost(); showToast('Đã bỏ phần phía sau'); }
-      } else if(t.dataset.rear){
-        const b=byId(t.dataset.rear), f=t.dataset.f; if(!b) return;
-        if(f==='label') b.label=t.value||b.label;
-        else { const v=parseFloat(t.value); if(!isFinite(v)||v<1) return; b[f]=Math.min(v,12); }
-        // 2 phòng xếp ngang: tổng rộng không vượt bề rộng nhà, bắt đầu từ y = hết phần chính
-        const a=byId('rearA'), c=byId('rearB');
-        if(a&&c){ if(f==='w'&&b===a) c.w=Math.min(c.w,Math.max(1,house.W-a.w)); if(b===c) c.w=Math.min(c.w,Math.max(1,house.W-a.w)); a.w=Math.min(a.w,house.W-1); a.x=0; c.x=a.w; }
-        [a,c].forEach(r=>{ if(r){ r.y=house.Dm; r.w=Math.min(r.w,house.W); } });
-      } else return;
-      save(); render(); if(sceneReady) rebuildScene(); syncHouseInputs();
-    });
-  })();
-  renderBack();
 
   /* ===== THÊM PHÒNG ===== */
   function addRoomFlow(after){
@@ -2292,6 +2315,7 @@ details.rmpanel summary{font-size:.9rem;}
           '<div class="rnote" style="text-align:center">Đầu nhà hướng '+bearingLabel(design.heading||0)+' · ký hiệu B/Đ/N/T = Bắc/Đông/Nam/Tây</div>');
       add('<h2>Tầng trệt và Gác (xem riêng)</h2><div class="rtwo"><div><div class="rcap">Tầng trệt — '+f2(aT)+' m²</div><img src="'+tr.url+'"></div><div><div class="rcap">Gác — '+f2(aG)+' m²</div><img src="'+ga.url+'"></div></div>');
     }
+    if(expSel.plan&&feng&&feng.show){ const fo=document.createElement('div'); fo.className='panel'; fo.innerHTML='<h2>Cung vị (bát quái) của từng khu vực và đồ dùng</h2>'+placeCheckHtml(false)+fengInfoHtml()+fengListHtml()+'<h3>Ý nghĩa 9 cung và gợi ý bố trí</h3>'+fengLegendHtml(); add(fo); }
     if(expSel.plan3d){
       const u=threeDataUrl();
       if(u) add('<h2>Ảnh 3D</h2><img src="'+u+'" style="width:100%">'); else add('<h2>Ảnh 3D</h2><div class="rnote">Không tạo được ảnh 3D trên thiết bị này.</div>');
@@ -2398,7 +2422,6 @@ details.rmpanel summary{font-size:.9rem;}
     ['vt','Mua vật tư, thiết bị','Thiết bị vệ sinh, ổ cắm/công tắc/đèn, bình nóng lạnh, dụng cụ…'],
     ['dd','Đồ dùng','Bàn, tủ, giường, máy giặt, bếp… (nạp nhanh từ mặt bằng)']
   ];
-  (function(){ try{ (JSON.parse(localStorage.getItem('gac_cost_v1')||'{}').summ||{}).cats.forEach(c=>SUM_CATS.push([c.id,c.name,'Nhóm tự thêm'])); }catch(e){} })();
   function SUM_CAT_OPTS(cur){
     return '<option value=""'+(!cur?' selected':'')+'>Tự động</option>'+SUM_CATS.map(c=>'<option value="'+c[0]+'"'+(cur===c[0]?' selected':'')+'>'+c[1]+'</option>').join('');
   }
@@ -2421,9 +2444,6 @@ details.rmpanel summary{font-size:.9rem;}
     cost.fixtures.forEach(x=>{ if(x.qty>0) L.push({cat:'vt',key:'f:'+x.id,src:'Chi phí',name:'Thiết bị VS: '+x.name,qty:x.qty,unit:'cái',price:x.price,kind:'fixture',id:x.id}); });
     materialList(C).forEach(m=>{ if(['outlet','switch','light'].indexOf(m.key)>=0&&m.qty>0) L.push({cat:'vt',key:'m:'+m.key,src:'Chi phí',name:m.name,qty:m.qty,unit:m.unit,price:m.price,kind:'mat',id:m.key}); });
     cost.tools.forEach(t=>{ if((t.status==='buy'||t.status==='rent')&&t.qty>0) L.push({cat:'vt',key:'t:'+t.id,src:'Chi phí',name:'Dụng cụ: '+t.name+(t.status==='rent'?' (thuê)':''),qty:t.qty,unit:'cái',price:t.price,kind:'tool',id:t.id}); });
-    S.ov=S.ov||{}; S.del=S.del||{};
-    L.forEach(l=>{ const o=S.ov[l.key]; if(o){ if(o.name!=null) l.name=o.name; if(o.qty!=null) l.qty=o.qty; if(o.unit!=null) l.unit=o.unit; if(o.cat) l.cat=o.cat; if(o.price!=null) l.price=o.price; l.edited=true; } });
-    for(let i=L.length-1;i>=0;i--) if(S.del[L[i].key]) L.splice(i,1);
     L.forEach(l=>{ l.on=!S.off[l.key]; });
     S.manual.forEach(m=>L.push({cat:m.cat,key:'x:'+m.id,src:'Thêm tay',name:m.name,qty:m.qty,unit:m.unit,price:m.price,kind:'manual',id:m.id,on:m.on!==false}));
     return L;
@@ -2447,13 +2467,12 @@ details.rmpanel summary{font-size:.9rem;}
        '<tr class="sub"><td>Cộng các nhóm</td><td class="num">'+O('sm.total')+'</td><td></td><td></td></tr>'+
        '<tr><td>Dự phòng phát sinh <input type="number" min="0" step="1" style="width:56px" data-sc="cont" value="'+S.cont+'">%</td><td class="num">'+O('sm.cont')+'</td><td></td><td></td></tr>'+
        '<tr class="tot"><td>TỔNG CỘNG</td><td class="num">'+O('sm.grand2')+'</td><td></td><td></td></tr></tbody></table></div>'+
-       '<div class="note">Mỗi dòng bên dưới lấy từ tab <b>Sửa chữa</b> và tab <b>Chi phí</b>; đơn giá sửa ngay tại đây được. <b>Bỏ tick “Tính”</b> để loại một hạng mục khỏi tổng, hoặc dùng <b>+ Thêm hạng mục</b> để thêm dòng tuỳ ý vào từng nhóm. Mọi dòng đều <b>sửa được tên, số lượng, đơn giá, nhóm</b> và <b>xoá (✕)</b> ngay tại đây (chỉ ảnh hưởng bảng tóm tắt, không đổi tab gốc); bấm “Khôi phục” để trả lại.</div>'+
-       '<div class="btnrow"><button class="primary" data-act="copySum">Sao chép tóm tắt</button><button data-act="addCat">+ Thêm nhóm chi phí</button><button data-act="restoreSum">Khôi phục dòng đã xoá/sửa</button><button class="danger" data-act="resetSum">Đặt lại các dòng thêm tay</button></div></div>';
+       '<div class="note">Mỗi dòng bên dưới lấy từ tab <b>Sửa chữa</b> và tab <b>Chi phí</b>; đơn giá sửa ngay tại đây được. <b>Bỏ tick “Tính”</b> để loại một hạng mục khỏi tổng, hoặc dùng <b>+ Thêm hạng mục</b> để thêm dòng tuỳ ý vào từng nhóm. Muốn đổi số lượng của hạng mục lấy từ tab khác thì sửa ở tab đó.</div>'+
+       '<div class="btnrow"><button class="primary" data-act="copySum">Sao chép tóm tắt</button><button class="danger" data-act="resetSum">Đặt lại các dòng thêm tay</button></div></div>';
 
     SUM_CATS.forEach(c=>{
       const rows=SC.L.filter(l=>l.cat===c[0]);
-      const cust=(cost.summ.cats||[]).some(x=>x.id===c[0]);
-      h+='<div class="panel"><h2>'+(cust?'<input type="text" data-catname="'+c[0]+'" value="'+escH(c[1])+'" style="font-size:1rem;font-weight:700;width:60%"> <button class="miniBtn danger" data-act="delCat" data-cat="'+c[0]+'">Xoá nhóm</button>':c[1])+' <span style="float:right;color:var(--accent)">'+O('sc2.'+c[0])+' đ</span></h2><div class="sub2">'+c[2]+'</div><div class="tblwrap"><table class="tbl"><thead><tr><th>Tính</th><th>Hạng mục</th><th>Nguồn</th><th class="num">SL</th><th>ĐV</th><th class="num">Đơn giá (đ)</th><th class="num">Thành tiền (đ)</th><th></th></tr></thead><tbody>';
+      h+='<div class="panel"><h2>'+c[1]+' <span style="float:right;color:var(--accent)">'+O('sc2.'+c[0])+' đ</span></h2><div class="sub2">'+c[2]+'</div><div class="tblwrap"><table class="tbl"><thead><tr><th>Tính</th><th>Hạng mục</th><th>Nguồn</th><th class="num">SL</th><th>ĐV</th><th class="num">Đơn giá (đ)</th><th class="num">Thành tiền (đ)</th><th></th></tr></thead><tbody>';
       if(!rows.length) h+='<tr><td colspan="8" style="color:var(--muted)">Chưa có hạng mục — bấm “+ Thêm hạng mục”.</td></tr>';
       rows.forEach(l=>{
         const chk='<input type="checkbox" data-skon="'+escH(l.key)+'"'+(l.on?' checked':'')+'>';
@@ -2461,8 +2480,8 @@ details.rmpanel summary{font-size:.9rem;}
           const a='data-sm="'+l.id+'"';
           h+='<tr class="'+(l.on?'':'off')+'"><td>'+chk+'</td><td><input type="text" style="width:200px" '+a+' data-field="name" data-str="1" value="'+escH(l.name)+'"></td><td>'+l.src+'</td><td class="num"><input type="number" min="0" step="0.5" '+a+' data-field="qty" value="'+l.qty+'"></td><td><input type="text" style="width:55px" '+a+' data-field="unit" data-str="1" value="'+escH(l.unit)+'"></td><td class="num"><input type="number" min="0" step="10000" '+a+' data-field="price" value="'+l.price+'"></td><td class="num b">'+O('sa.'+l.key)+'</td><td><button class="miniBtn danger" data-act="delSum" data-id="'+l.id+'">✕</button></td></tr>';
         } else {
-          const a='data-ov="'+escH(l.key)+'"', cs=SUM_CATS.map(x=>'<option value="'+x[0]+'"'+(x[0]===l.cat?' selected':'')+'>'+x[1]+'</option>').join('');
-          h+='<tr class="'+(l.on?'':'off')+'">'+'<td>'+chk+'</td><td><input type="text" style="width:200px" '+a+' data-field="name" data-str="1" value="'+escH(l.name)+'">'+(l.where?'<br><small style="color:var(--muted)">'+escH(l.where)+'</small>':'')+'<br><select '+a+' data-field="cat" data-str="1" style="font-size:.7rem">'+cs+'</select></td><td>'+l.src+'</td><td class="num"><input type="number" min="0" step="0.5" '+a+' data-field="qty" value="'+(Math.round(l.qty*100)/100)+'"></td><td><input type="text" style="width:55px" '+a+' data-field="unit" data-str="1" value="'+escH(l.unit)+'"></td><td class="num"><input type="number" min="0" step="5000" '+a+' data-field="price" value="'+Math.round(l.price)+'"></td><td class="num b">'+O('sa.'+l.key)+'</td><td><button class="miniBtn danger" data-act="delAuto" data-key="'+escH(l.key)+'" title="Xoá dòng này khỏi tóm tắt">✕</button></td></tr>';
+          const price=(l.kind==='ro')?fmt(l.price):'<input type="number" min="0" step="5000" data-sprice="'+l.kind+'" data-id="'+escH(l.id)+'" value="'+Math.round(l.price)+'">';
+          h+='<tr class="'+(l.on?'':'off')+'"><td>'+chk+'</td><td>'+escH(l.name)+(l.where?'<br><small style="color:var(--muted)">'+escH(l.where)+'</small>':'')+'</td><td>'+l.src+'</td><td class="num">'+fq(l.qty)+'</td><td>'+escH(l.unit)+'</td><td class="num">'+price+'</td><td class="num b">'+O('sa.'+l.key)+'</td><td></td></tr>';
         }
       });
       h+='</tbody></table></div><div class="btnrow"><button data-act="addSum" data-cat="'+c[0]+'">+ Thêm hạng mục</button>'+(c[0]==='dd'?'<button data-act="loadFurn">Nạp đồ dùng từ mặt bằng</button>':'')+'</div></div>';
@@ -2529,12 +2548,6 @@ details.rmpanel summary{font-size:.9rem;}
         const m=cost.summ.manual.find(x=>x.id===t.dataset.sm); if(!m) return;
         if(t.dataset.str) m[t.dataset.field]=t.value; else { const v=parseFloat(t.value); m[t.dataset.field]=isFinite(v)?v:0; }
       }
-      else if(t.dataset.catname){ const cc=(cost.summ.cats||[]).find(x=>x.id===t.dataset.catname), sc=SUM_CATS.find(x=>x[0]===t.dataset.catname); if(cc) cc.name=t.value; if(sc) sc[1]=t.value; }
-      else if(t.dataset.ov){
-        const S=cost.summ; S.ov=S.ov||{}; const o=(S.ov[t.dataset.ov]=S.ov[t.dataset.ov]||{}), f=t.dataset.field;
-        if(t.dataset.str) o[f]=t.value; else { const v=parseFloat(t.value); o[f]=isFinite(v)?v:0; }
-        if(f==='cat'){ saveCost(); renderSummary(); return; }
-      }
       else if(t.dataset.sprice){
         const v=parseFloat(t.value), p=isFinite(v)?v:0, k=t.dataset.sprice, id=t.dataset.id;
         if(k==='repair'){ const m=repair.items.find(x=>x.id===id); if(m){ m.price=p; saveRepair(); } }
@@ -2550,10 +2563,6 @@ details.rmpanel summary{font-size:.9rem;}
     root.addEventListener('click',e=>{
       const b=e.target.closest('[data-act]'); if(!b) return; const act=b.dataset.act;
       if(act==='addSum') cost.summ.manual.push({id:'m'+Date.now(),cat:b.dataset.cat,name:'Hạng mục mới',qty:1,unit:'cái',price:100000,on:true});
-      else if(act==='delAuto'){ cost.summ.del=cost.summ.del||{}; cost.summ.del[b.dataset.key]=true; }
-      else if(act==='restoreSum'){ cost.summ.del={}; cost.summ.ov={}; showToast('Đã khôi phục các dòng tự động'); }
-      else if(act==='addCat'){ const c=cost.summ.cats=cost.summ.cats||[]; const id='c'+Date.now(); c.push({id:id,name:'Nhóm chi phí mới'}); SUM_CATS.push([id,'Nhóm chi phí mới','Nhóm tự thêm']); }
-      else if(act==='delCat'){ const id=b.dataset.cat; cost.summ.cats=(cost.summ.cats||[]).filter(c=>c.id!==id); const i=SUM_CATS.findIndex(c=>c[0]===id); if(i>=0) SUM_CATS.splice(i,1); cost.summ.manual=cost.summ.manual.filter(m=>m.cat!==id); }
       else if(act==='delSum') cost.summ.manual=cost.summ.manual.filter(x=>x.id!==b.dataset.id);
       else if(act==='loadFurn') loadFurnFromPlan();
       else if(act==='resetSum'){ cost.summ.manual=defaultCost().summ.manual; cost.summ.off={}; showToast('Đã đặt lại các dòng thêm tay'); }
@@ -2566,71 +2575,649 @@ details.rmpanel summary{font-size:.9rem;}
   })();
 
   /* ============================================================
-     CHAT BOX — hỏi đáp chi phí (chạy ngay trên máy, đọc số liệu hiện tại của các tab)
+     CUNG VỊ (bát quái – cửu cung) + hướng tốt/xấu theo tuổi (bát trạch)
   ============================================================ */
-  (function(){
-    const nz=t=>String(t).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d');
-    const STOP=new Set('la bao nhieu tien gia chi phi cho cua toi minh hay co the nao the nhung cac mot nay no va o trong tong ve hang muc khoan phi dong d tinh xem cho biet tim kiem'.split(' '));
-    const mon=n=>fmt(n)+' đ'+(n>=1e6?' (≈ '+(n/1e6).toLocaleString('vi-VN',{maximumFractionDigits:1})+' triệu)':'');
-    const log=document.getElementById('chatLog'), inp=document.getElementById('chatIn'), box=document.getElementById('chatBox');
-    function say(html,who){ const d=document.createElement('div'); d.className='msg '+who; d.innerHTML=html; log.appendChild(d); log.scrollTop=log.scrollHeight; }
-    const lines=ls=>'<ul>'+ls.map(l=>'<li>'+l+'</li>').join('')+'</ul>';
-    const ln=l=>'<b>'+escH(l.name)+'</b>: '+fq(l.qty)+' '+escH(l.unit)+' × '+fmt(l.price)+' = <b>'+fmt(l.amt)+' đ</b>'+(l.on?'':' <i>(đang tắt)</i>');
-    function answer(q){
-      const n=nz(q), SC=summaryCalc(), C=computeCost(), RP=repairCalc(), zs=getZones(), act=SC.L.filter(l=>l.on);
-      const words=n.replace(/[^a-z0-9 ]/g,' ').split(/\s+/).filter(w=>w&&!STOP.has(w));
-      // 1) tổng hợp
-      if(/tong|tat ca|toan bo|tong hop|tong quan/.test(n) && !/phong|gac/.test(n)){
-        return 'Tổng hợp hiện tại:'+lines([
-          '<b>Tóm tắt 5 nhóm</b> (đã gồm dự phòng '+cost.summ.cont+'%): <b>'+mon(SC.grand)+'</b>',
-          ...SUM_CATS.map(c=>escH(c[1])+': '+fmt(SC.sums[c[0]]||0)+' đ'),
-          '<b>Tab Chi phí</b> (dự toán theo khoảng): <b>'+mon(C.grand)+'</b>',
-          '<b>Tab Sửa chữa</b> (báo giá theo phòng): <b>'+mon(RP.grand)+'</b>'])+'<small>Ba con số là ba cách tính độc lập, không cộng với nhau.</small>';
+  const DIRS=['Bắc','Đông Bắc','Đông','Đông Nam','Nam','Tây Nam','Tây','Tây Bắc'];
+  // thứ tự khớp với dirName(): 0 Bắc, 1 ĐB, 2 Đ, 3 ĐN, 4 N, 5 TN, 6 T, 7 TB
+  const CUNG=[
+    {q:'Khảm',n:1,h:'Thủy',y:'Sự nghiệp',s:'Sự nghiệp',tip:'Hợp bàn làm việc, góc học tập, cây thủy sinh. Hạn chế đặt bếp (Thủy khắc Hỏa).',col:'#4a90d9'},
+    {q:'Cấn',n:8,h:'Thổ',y:'Tri thức, học hành',s:'Tri thức',tip:'Hợp bàn học, kệ sách, góc đọc sách.',col:'#d4a017'},
+    {q:'Chấn',n:3,h:'Mộc',y:'Gia đạo, sức khỏe',s:'Gia đạo',tip:'Hợp khu sinh hoạt chung, cây xanh, đón nắng sáng.',col:'#4caf50'},
+    {q:'Tốn',n:4,h:'Mộc',y:'Tài lộc',s:'Tài lộc',tip:'Hợp bàn làm việc, tủ/két quan trọng; giữ sạch, thoáng. Kiêng nhà vệ sinh (dễ “rò rỉ” tài lộc).',col:'#4caf50'},
+    {q:'Ly',n:9,h:'Hỏa',y:'Danh tiếng',s:'Danh tiếng',tip:'Hợp bếp, đèn sáng, khu tiếp khách; tránh quá nhiều nước.',col:'#e8553d'},
+    {q:'Khôn',n:2,h:'Thổ',y:'Tình duyên, hôn nhân',s:'Tình duyên',tip:'Hợp phòng ngủ vợ chồng, tông màu ấm, đồ đặt thành đôi.',col:'#d4a017'},
+    {q:'Đoài',n:7,h:'Kim',y:'Con cái, sáng tạo',s:'Con cái',tip:'Hợp phòng con, góc vui chơi / giải trí.',col:'#9aa5ad'},
+    {q:'Càn',n:6,h:'Kim',y:'Quý nhân, quyền lực',s:'Quý nhân',tip:'Hợp phòng chủ nhà, phòng khách, bàn thờ. Kiêng bếp và nhà vệ sinh.',col:'#9aa5ad'}
+  ];
+  const CUNG_CENTER={q:'Trung cung',n:5,h:'Thổ',y:'Sức khỏe, trung tâm nhà',s:'Trung tâm',tip:'Nên để thoáng và sáng; tránh đặt bếp, nhà vệ sinh ở giữa nhà.',col:'#c9b57a'};
+  // Bát trạch: chỉ số hướng của Sinh khí / Thiên y / Diên niên / Phục vị / Tuyệt mệnh theo cung phi
+  const BT={
+    'Khảm':{sk:3,ty:2,dn:4,pv:0,tm:5}, 'Chấn':{sk:4,ty:0,dn:3,pv:2,tm:6},
+    'Tốn':{sk:0,ty:4,dn:2,pv:3,tm:1},  'Ly':{sk:2,ty:3,dn:0,pv:4,tm:7},
+    'Càn':{sk:6,ty:1,dn:5,pv:7,tm:4},  'Khôn':{sk:1,ty:6,dn:7,pv:5,tm:0},
+    'Cấn':{sk:5,ty:7,dn:6,pv:1,tm:3},  'Đoài':{sk:7,ty:5,dn:1,pv:6,tm:2}
+  };
+  const FENG_KEY='gac_feng_v1';
+  function defaultFeng(){ return {show:true,mean:true,hint:true,bepFace:-1,sel:-1,people:[{name:'Gia chủ 1',year:'',sex:'nam'},{name:'Gia chủ 2',year:'',sex:'nu'}]}; }
+  function mergeFeng(s){ const d=defaultFeng(); const r=Object.assign(d,s||{}); if(!Array.isArray(r.people)||r.people.length<2) r.people=defaultFeng().people; return r; }
+  var feng=null;
+  try{ feng=mergeFeng(JSON.parse(localStorage.getItem(FENG_KEY)||'null')); }catch(e){ feng=defaultFeng(); }
+  function saveFeng(){ try{ localStorage.setItem(FENG_KEY,JSON.stringify(feng)); }catch(e){} }
+
+  function cungPhi(year,sex){
+    const dsum=n=>String(n).split('').reduce((a,c)=>a+(+c),0);
+    let s=dsum(year); while(s>9) s=dsum(s);
+    let k=(sex==='nam')?11-s:s+4; while(k>9) k-=9;
+    if(k===5) k=(sex==='nam')?2:8;
+    return {1:'Khảm',2:'Khôn',3:'Chấn',4:'Tốn',6:'Càn',7:'Đoài',8:'Cấn',9:'Ly'}[k];
+  }
+  function personInfo(p){
+    const y=parseInt(p.year,10); if(!(y>=1900&&y<=2100)) return null;
+    const q=cungPhi(y,p.sex), t=BT[q], dirs=[];
+    for(let i=0;i<8;i++) dirs[i]={name:'Hướng xấu (ngũ quỷ / lục sát / họa hại)',short:'Xấu',good:false};
+    dirs[t.sk]={name:'Sinh khí',short:'Sinh khí',good:true};
+    dirs[t.ty]={name:'Thiên y',short:'Thiên y',good:true};
+    dirs[t.dn]={name:'Diên niên',short:'Diên niên',good:true};
+    dirs[t.pv]={name:'Phục vị',short:'Phục vị',good:true};
+    dirs[t.tm]={name:'Tuyệt mệnh',short:'Tuyệt mệnh',good:false};
+    return {name:p.name,year:y,sex:p.sex,q:q,group:['Khảm','Ly','Chấn','Tốn'].indexOf(q)>=0?'Đông tứ mệnh':'Tây tứ mệnh',dirs:dirs};
+  }
+  function currentPerson(){ return (feng&&feng.sel>=0)?personInfo(feng.people[feng.sel]):null; }
+
+  function cungOfCell(ix,iy){
+    const dx=ix-1, dy=iy-1; if(!dx&&!dy) return -1;
+    const b=(design.heading||0)+Math.atan2(dx,-dy)*180/Math.PI;
+    return Math.round((((b%360)+360)%360)/45)%8;
+  }
+  function cungAt(x,y){
+    const ix=Math.max(0,Math.min(2,Math.floor(x/(house.W/3)))), iy=Math.max(0,Math.min(2,Math.floor(y/(house.D/3))));
+    return cungOfCell(ix,iy);
+  }
+  const cungObj=i=>i<0?CUNG_CENTER:CUNG[i];
+  const cungLabel=i=>i<0?'Trung cung':(DIRS[i]+' · '+CUNG[i].q);
+
+  function drawFeng(){
+    const g=document.getElementById('fengG'); if(!g) return;
+    if(!feng||!feng.show){ g.innerHTML=''; drawFengBadges(); return; }
+    const cw=house.W/3*SCALE, ch=house.D/3*SCALE, per=currentPerson();
+    const hs=feng.hint!==false?{bep:sugCells('bep').slice(0,2).map(c=>c.key),nvs:sugCells('nvs').slice(0,2).map(c=>c.key)}:null;
+    let h='';
+    for(let iy=0;iy<3;iy++) for(let ix=0;ix<3;ix++){
+      const i=cungOfCell(ix,iy), c=cungObj(i), x=OX+ix*cw, y=OY+iy*ch;
+      let fill=c.col, op=0.12, tcol='var(--muted)', star='';
+      if(per&&i>=0){ const d=per.dirs[i]; fill=d.good?'#2e9e5b':'#d6453a'; op=d.good?0.2:0.16; tcol=d.good?'#1f7a44':'#b3362d'; star=d.short; }
+      h+='<rect x="'+x+'" y="'+y+'" width="'+cw+'" height="'+ch+'" fill="'+fill+'" fill-opacity="'+op+'" stroke="var(--line)" stroke-dasharray="2 3"/>';
+      h+='<text x="'+(x+4)+'" y="'+(y+ch-5-(feng.mean?9:0)-(star?9:0))+'" font-size="8.5" font-weight="700" fill="'+tcol+'">'+(i<0?'Trung cung':(DIRS[i]+' · '+c.q))+'</text>';
+      if(feng.mean) h+='<text x="'+(x+4)+'" y="'+(y+ch-5-(star?9:0))+'" font-size="7.5" fill="var(--muted)">'+c.s+' · '+c.h+'</text>';
+      if(star) h+='<text x="'+(x+4)+'" y="'+(y+ch-5)+'" font-size="8" font-weight="700" fill="'+tcol+'">'+star+'</text>';
+      if(hs){
+        const key=ix+','+iy, tg=[];
+        if(hs.bep.indexOf(key)>=0) tg.push(['Bếp ✓','#2e9e5b']);
+        if(hs.nvs.indexOf(key)>=0) tg.push(['NVS ✓','#4a90d9']);
+        tg.forEach((t,k)=>{ h+='<rect x="'+(x+cw-40)+'" y="'+(y+4+k*13)+'" width="36" height="11" rx="5" fill="'+t[1]+'" fill-opacity=".92"/><text x="'+(x+cw-22)+'" y="'+(y+12.5+k*13)+'" text-anchor="middle" font-size="7.5" font-weight="700" fill="#fff">'+t[0]+'</text>'; });
       }
-      // 2) đắt nhất / liệt kê
-      if(/dat nhat|cao nhat|lon nhat|top|nhieu nhat/.test(n)){
-        const t=act.slice().sort((a,b)=>b.amt-a.amt).slice(0,6); return 'Các hạng mục tốn nhiều nhất (tab Tóm tắt):'+lines(t.map(ln));
-      }
-      // 3) theo phòng
-      const z=zs.find(z=>n.indexOf(nz(z.name))>=0);
-      if(z){ const r=RP.rooms[z.id], c=C.Z[z.id], its=repair.items.filter(m=>r.items[m.id].cost>0).map(m=>escH(m.name)+': '+fmt(r.items[m.id].cost)+' đ');
-        return '<b>'+escH(z.name)+'</b> ('+f1(r.g.area)+' m²):'+lines(['Báo giá sửa chữa: <b>'+mon(r.total)+'</b>','Dự toán (tab Chi phí): <b>'+mon(c.total)+'</b> — sơn '+fmt(c.paint)+', điện '+fmt(c.elec)+', cửa '+fmt(c.doors)+', gạch '+fmt(c.tile)+', VS '+fmt(c.fix)+', khác '+fmt(c.other)].concat(its.length?['Chi tiết sửa chữa:'+lines(its)]:[])); }
-      // 4) theo nhóm
-      const cats=[['dn',/dien|nuoc/],['lp',/la phong|tran|thach cao/],['vt',/vat tu|thiet bi/],['dd',/do dung|noi that/],['xd',/xay dung|sua chua|son|gach|chong tham/]];
-      for(const [id,re] of cats){ if(re.test(n)&&SUM_CATS.some(c=>c[0]===id)&&!words.some(w=>act.some(l=>nz(l.name).indexOf(w)>=0)&&!re.test(w))){
-        const t=act.filter(l=>l.cat===id); return '<b>'+escH(SUM_CATS.find(c=>c[0]===id)[1])+'</b>: <b>'+mon(SC.sums[id])+'</b>'+(t.length?lines(t.map(ln)):''); } }
-      const cu=SUM_CATS.find(c=>n.indexOf(nz(c[1]))>=0);
-      if(cu){ const t=act.filter(l=>l.cat===cu[0]); return '<b>'+escH(cu[1])+'</b>: <b>'+mon(SC.sums[cu[0]])+'</b>'+lines(t.map(ln)); }
-      // 5) diện tích
-      if(/dien tich|m2|met vuong/.test(n)&&!words.some(w=>w.length>3&&act.some(l=>nz(l.name).indexOf(w)>=0))) return 'Diện tích sàn:'+lines(zs.map(z=>escH(z.name)+' ('+(z.floor==='tret'?'trệt':'gác')+'): '+f2(zoneGeo(z.id).area)+' m²'));
-      // 6) tìm hạng mục theo từ khoá
-      if(words.length){
-        const score=name=>{ const x=nz(name); return words.reduce((s,w)=>s+(x.indexOf(w)>=0?1:0),0); };
-        const hit=SC.L.map(l=>({l,s:score(l.name)})).filter(o=>o.s>0).sort((a,b)=>b.s-a.s||b.l.amt-a.l.amt).slice(0,8);
-        const best=hit.length?hit[0].s:0, sel=hit.filter(o=>o.s===best).map(o=>o.l);
-        const cat=repair.items.map(m=>({m,s:score(m.name+' '+m.group)})).filter(o=>o.s>0).sort((a,b)=>b.s-a.s).slice(0,5);
-        const oth=cost.others.filter(o=>score(o.name)>0).map(o=>'<b>'+escH(o.name)+'</b>: '+fq(o.qty)+' '+escH(o.unit)+' × '+fmt(o.price)+' = <b>'+fmt(o.qty*o.price)+' đ</b> (tab Chi phí)');
-        if(sel.length||cat.length||oth.length){
-          let h='';
-          if(sel.length) h+='Trong bảng tóm tắt:'+lines(sel.map(ln))+(sel.length>1?'<small>Cộng: <b>'+fmt(sel.reduce((s,l)=>s+(l.on?l.amt:0),0))+' đ</b></small>':'');
-          if(oth.length) h+='Chi phí khác:'+lines(oth);
-          if(cat.length&&!sel.length) h+='Đơn giá trong bảng sửa chữa:'+lines(cat.map(o=>'<b>'+escH(o.m.name)+'</b>: '+fmt(o.m.price)+' đ/'+escH(o.m.unit)));
-          return h;
-        }
-      }
-      return 'Mình chưa tìm thấy hạng mục khớp. Thử hỏi theo mẫu: <i>“tổng chi phí”</i>, <i>“điện nước bao nhiêu”</i>, <i>“Gác A tốn bao nhiêu”</i>, <i>“hạng mục đắt nhất”</i>, hoặc tên hạng mục như <i>“bồn cầu”</i>, <i>“sơn tường”</i>, <i>“máy giặt”</i>.';
     }
-    function ask(q){ q=q.trim(); if(!q) return; say(escH(q),'u'); try{ say(answer(q),'b'); }catch(e){ say('Có lỗi khi tính: '+escH(e.message),'b'); } }
-    ['Tổng chi phí','Hạng mục đắt nhất','Điện nước bao nhiêu?','Đồ dùng hết bao nhiêu?','Bồn cầu giá bao nhiêu?'].forEach(t=>{ const b=document.createElement('button'); b.textContent=t; b.onclick=()=>ask(t); document.getElementById('chatChips').appendChild(b); });
-    const go=()=>{ ask(inp.value); inp.value=''; };
-    document.getElementById('chatSend').onclick=go; inp.addEventListener('keydown',e=>{ if(e.key==='Enter') go(); });
-    document.getElementById('chatFab').onclick=()=>{ box.classList.toggle('show'); if(box.classList.contains('show')&&!log.children.length) say('Chào bạn! Mình đọc số liệu chi phí hiện tại của bạn. Hỏi tổng chi phí, từng nhóm, từng phòng, hoặc tên một hạng mục để biết giá.','b'); };
-    document.getElementById('chatX').onclick=()=>box.classList.remove('show');
+    g.innerHTML=h; drawFengBadges();
+  }
+
+  function kindOf(l,t){
+    l=(l||'').toLowerCase();
+    if(t==='gac'||/giường|ngủ/.test(l)) return 'ngu';
+    if(/bếp/.test(l)) return 'bep';
+    if(/nvs|vệ sinh|toilet|wc|nhà tắm/.test(l)) return 'wc';
+    if(/học|làm việc|sách/.test(l)) return 'hoc';
+    if(/bàn ăn/.test(l)) return 'an';
+    return 'chung';
+  }
+  function evalPlace(kind,i,per){
+    const O=t=>({txt:t,cls:'ok'}), W=t=>({txt:t,cls:'warn'}), N=t=>({txt:t,cls:''});
+    if(per&&i>=0){
+      const d=per.dirs[i], nm=d.name, sh=(d.short==='Xấu'?'xấu':d.short);
+      if(kind==='ngu') return (d.good&&nm!=='Sinh khí')?O('Tốt cho ngủ nghỉ ('+nm+')'):(nm==='Sinh khí'?N('Sinh khí: hợp làm việc/học hơn là ngủ'):W('Hướng xấu cho giấc ngủ ('+sh+') — cân nhắc đổi chỗ'));
+      if(kind==='bep'||kind==='hoc'||kind==='an') return d.good?O('Hợp tuổi ('+nm+')'):W('Không hợp tuổi ('+sh+') — cân nhắc đổi chỗ');
+      if(kind==='wc') return d.good?W('Chiếm hướng tốt ('+nm+') — nên nhường cho phòng chính'):O('Hợp lý: nhà vệ sinh nên ở hướng xấu ('+sh+')');
+      return N(d.good?('Hướng tốt: '+nm):('Hướng xấu'+(sh==='xấu'?'':': '+sh)));
+    }
+    if(kind==='bep'){
+      if(i<0) return W('Trung cung — tránh đặt bếp');
+      if(i===4||i===2||i===3) return O('Cung Hỏa/Mộc — hợp đặt bếp');
+      if(i===0) return W('Cung Thủy khắc Hỏa — cân nhắc');
+      if(i===7) return W('Cung Càn (quý nhân) — kiêng đặt bếp');
+      return N('Bình thường');
+    }
+    if(kind==='wc'){
+      if(i<0) return W('Trung cung — kiêng nhà vệ sinh');
+      if(i===7) return W('Tây Bắc (Càn) — kiêng nhà vệ sinh');
+      if(i===3) return W('Đông Nam (Tài lộc) — dễ “rò rỉ” tài lộc');
+      return O('Chấp nhận được');
+    }
+    if(kind==='ngu'){
+      if(i===5) return O('Hợp phòng ngủ vợ chồng'); if(i===6) return O('Hợp phòng con'); if(i===7) return O('Hợp phòng chủ nhà');
+      if(i<0) return W('Trung cung — nên để thoáng'); return N('Bình thường');
+    }
+    if(kind==='hoc'){ if(i===1) return O('Cung Tri thức — rất hợp bàn học'); if(i===0||i===3) return O('Hợp làm việc'); return N('Bình thường'); }
+    return N('');
+  }
+
+  function fengRows(){
+    const rows=[], per=currentPerson();
+    const add=(name,floor,x,y,kind)=>{ const i=cungAt(x,y); rows.push({name:name,floor:floor,i:i,ev:evalPlace(kind,i,per),star:(per&&i>=0)?per.dirs[i]:null}); };
+    add('Phòng 1','Trệt',house.rw/2,house.p1/2,'chung');
+    add('Phòng kề','Trệt',house.rw/2,house.p1+house.pk/2,'chung');
+    add('Luồng','Trệt',house.rw+house.cor/2,house.D/2,'chung');
+    blocks.forEach(b=>{ add(b.label,isGacFloor(b)?'Gác':'Trệt',b.x+b.w/2,b.y+b.h/2,kindOf(b.label,b.type)); });
+    return rows;
+  }
+  function fengInfoHtml(){
+    const per=feng.people.map(personInfo).filter(Boolean);
+    let h='<div class="rnote" style="font-size:.78rem;color:var(--muted);margin-bottom:6px;">Cung vị chia mặt bằng thành 9 ô (lưới 3×3) theo hướng nhà ('+bearingLabel(design.heading||0)+' ở đầu nhà). Cách xem phong thủy bát quái / bát trạch mang tính tham khảo.</div>';
+    if(!per.length) return h+'<div class="rnote" style="font-size:.78rem;color:var(--muted);">Nhập năm sinh gia chủ để tô màu hướng tốt / xấu trên mặt bằng.</div>';
+    per.forEach(p=>{
+      const names=[]; p.dirs.forEach((d,i)=>{ if(d.good) names.push(DIRS[i]+' ('+d.name+')'); });
+      const bad=[]; p.dirs.forEach((d,i)=>{ if(!d.good) bad.push(DIRS[i]+(d.short==='Tuyệt mệnh'?' (Tuyệt mệnh)':'')); });
+      h+='<div style="margin:4px 0;"><b>'+escH(p.name)+'</b> ('+(p.sex==='nam'?'nam':'nữ')+' '+p.year+'): cung <b>'+p.q+'</b> — '+p.group+'.<br><span style="color:#1f7a44">Hướng tốt:</span> '+names.join(', ')+'.<br><span style="color:#b3362d">Hướng xấu:</span> '+bad.join(', ')+'.</div>';
+    });
+    return h;
+  }
+  function fengListHtml(){
+    const rows=fengRows(), per=currentPerson();
+    let h='<div class="tblwrap"><table class="tbl"><thead><tr><th>Khu vực / đồ dùng</th><th>Tầng</th><th>Cung</th><th>Ý nghĩa cung</th>'+(per?'<th>Theo tuổi</th>':'')+'<th>Nhận xét</th></tr></thead><tbody>';
+    rows.forEach(r=>{
+      const c=cungObj(r.i), col=r.ev.cls==='warn'?'#b3362d':(r.ev.cls==='ok'?'#1f7a44':'inherit');
+      h+='<tr><td>'+escH(r.name)+'</td><td>'+r.floor+'</td><td>'+cungLabel(r.i)+'</td><td>'+c.y+'</td>'+(per?'<td>'+(r.star?'<span style="color:'+(r.star.good?'#1f7a44':'#b3362d')+'">'+r.star.short+'</span>':'–')+'</td>':'')+'<td style="color:'+col+'">'+escH(r.ev.txt)+'</td></tr>';
+    });
+    return h+'</tbody></table></div><div class="rnote" style="font-size:.75rem;color:var(--muted);margin-top:4px;">Cung của đồ dùng tính theo tâm vị trí trên mặt bằng.</div>';
+  }
+  function fengLegendHtml(){
+    let h='<div class="tblwrap"><table class="tbl"><thead><tr><th>Cung</th><th>Hướng</th><th>Hành</th><th>Ý nghĩa</th><th>Gợi ý bố trí</th></tr></thead><tbody>';
+    CUNG.forEach((c,i)=>{ h+='<tr><td><b>'+c.q+'</b> ('+c.n+')</td><td>'+DIRS[i]+'</td><td>'+c.h+'</td><td>'+c.y+'</td><td>'+c.tip+'</td></tr>'; });
+    h+='<tr><td><b>'+CUNG_CENTER.q+'</b> (5)</td><td>Giữa nhà</td><td>'+CUNG_CENTER.h+'</td><td>'+CUNG_CENTER.y+'</td><td>'+CUNG_CENTER.tip+'</td></tr>';
+    return h+'</tbody></table></div>';
+  }
+  function renderFengList(){
+    const a=document.getElementById('fengInfo'), b=document.getElementById('fengList'); if(!a||!b||!feng) return;
+    a.innerHTML=fengInfoHtml(); b.innerHTML=fengListHtml(); renderPlaceCheck();
+  }
+  function syncFengUI(){
+    const set=(id,v)=>{ const el=document.getElementById(id); if(el&&document.activeElement!==el) el.value=v; };
+    document.getElementById('fengShow').checked=!!feng.show; document.getElementById('fengMean').checked=!!feng.mean;
+    set('fengSel',feng.sel); set('fengY0',feng.people[0].year); set('fengS0',feng.people[0].sex); set('fengY1',feng.people[1].year); set('fengS1',feng.people[1].sex);
+    document.getElementById('fengLegend').innerHTML=fengLegendHtml();
+    drawFeng(); renderFengList();
+  }
+  (function bindFeng(){
+    const upd=()=>{ saveFeng(); drawFeng(); renderFengList(); };
+    document.getElementById('fengShow').addEventListener('change',e=>{ feng.show=e.target.checked; upd(); });
+    document.getElementById('fengMean').addEventListener('change',e=>{ feng.mean=e.target.checked; upd(); });
+    document.getElementById('fengSel').addEventListener('change',e=>{ feng.sel=parseInt(e.target.value,10); upd(); });
+    [0,1].forEach(k=>{
+      document.getElementById('fengY'+k).addEventListener('input',e=>{ feng.people[k].year=e.target.value; upd(); });
+      document.getElementById('fengS'+k).addEventListener('change',e=>{ feng.people[k].sex=e.target.value; upd(); });
+    });
   })();
+
+  /* ============================================================
+     KIỂM TRA VỊ TRÍ BẾP & NHÀ VỆ SINH (cung vị, ngũ hành, bát trạch)
+  ============================================================ */
+  function cellAt(x,y){
+    const ix=Math.max(0,Math.min(2,Math.floor(x/(house.W/3)))), iy=Math.max(0,Math.min(2,Math.floor(y/(house.D/3))));
+    return {ix:ix,iy:iy,i:cungOfCell(ix,iy)};
+  }
+  const hanhOf=i=>i<0?'Thổ':CUNG[i].h;
+  function viTri(ix,iy){
+    return ['đầu nhà (trên bản vẽ)','giữa nhà','cuối nhà (dưới bản vẽ)'][iy]+', '+['bên trái','ở giữa','bên phải (sát luồng)'][ix];
+  }
+  function rectGap(a,b){
+    const dx=Math.max(0,Math.max(a.x-(b.x+b.w),b.x-(a.x+a.w))), dy=Math.max(0,Math.max(a.y-(b.y+b.h),b.y-(a.y+a.h)));
+    return Math.sqrt(dx*dx+dy*dy);
+  }
+  const fmtM=n=>(Math.round(n*10)/10).toLocaleString('vi-VN');
+
+  function checkBep(){
+    const b=byId('bep'); if(!b) return null;
+    const per=currentPerson(), c=cellAt(b.x+b.w/2,b.y+b.h/2), i=c.i, hn=hanhOf(i), items=[];
+    const where=cungLabel(i);
+    if(i<0) items.push({ok:false,t:'Bếp nằm ở Trung cung (giữa nhà) — kiêng đặt bếp.'});
+    else if(i===7) items.push({ok:false,t:'Bếp nằm ở '+where+' (hành Kim): Hỏa khắc Kim, ảnh hưởng chủ nhà — kiêng đặt bếp.'});
+    else if(hn==='Hỏa'||hn==='Mộc') items.push({ok:true,t:'Bếp nằm ở '+where+' (hành '+hn+'): hợp hành Hỏa của bếp'+(hn==='Mộc'?' (Mộc sinh Hỏa)':'')+'.'});
+    else if(hn==='Thổ') items.push({ok:null,t:'Bếp nằm ở '+where+' (hành Thổ): Hỏa sinh Thổ — bình thường, hơi hao khí.'});
+    else items.push({ok:false,t:'Bếp nằm ở '+where+' (hành '+hn+'): '+(hn==='Thủy'?'Thủy khắc Hỏa — xung với bếp.':'Hỏa khắc Kim — không hợp.')});
+    if(per&&i>=0){
+      const d=per.dirs[i];
+      items.push(d.good?{ok:true,t:'Vị trí bếp rơi vào hướng '+DIRS[i]+' ('+d.name+') — hợp tuổi '+per.name+' (cung '+per.q+').'}
+                       :{ok:null,t:'Vị trí bếp rơi vào hướng xấu ('+DIRS[i]+') của '+per.name+' — nên quay mặt người nấu về hướng tốt để hoá giải.'});
+    } else if(!per) items.push({t:'Chưa nhập tuổi gia chủ nên chưa xét hướng Bát trạch (nhập năm sinh ở mục Cung vị bên trên).'});
+    const face=(feng.bepFace===undefined)?-1:feng.bepFace;
+    if(face>=0){
+      const toa=(face+4)%8;
+      if(per){
+        const f=per.dirs[face], t=per.dirs[toa];
+        items.push(f.good?{ok:true,t:'Người nấu quay mặt về '+DIRS[face]+' ('+f.name+') — hướng tốt.'}:{ok:false,t:'Người nấu quay mặt về '+DIRS[face]+' — hướng xấu của '+per.name+'.'});
+        items.push(t.good?{ok:null,t:'Lưng bếp (tọa) ở '+DIRS[toa]+' là hướng tốt — chưa tối ưu, lý tưởng là “tọa hung hướng cát”.'}:{ok:true,t:'Lưng bếp (tọa) ở '+DIRS[toa]+' là hướng xấu — đúng nguyên tắc “tọa hung hướng cát”.'});
+      } else items.push({t:'Người nấu quay mặt về '+DIRS[face]+', lưng bếp về '+DIRS[toa]+'. Nhập tuổi để biết có hợp không.'});
+    } else items.push({t:'Chưa chọn hướng người nấu quay mặt — chọn ở ô bên dưới để xét “tọa hung hướng cát”.'});
+    const n=byId('nvs');
+    if(n){ const g=rectGap(b,n);
+      items.push(g<1?{ok:false,t:'Bếp cách NVS chỉ '+fmtM(g)+' m — kỵ thủy hỏa xung khắc, nên cách xa hoặc ngăn rõ.'}:{ok:true,t:'Bếp cách NVS '+fmtM(g)+' m — ổn, không bị thủy hỏa xung.'}); }
+    return {items:items,cell:c};
+  }
+  function checkNvs(){
+    const b=byId('nvs'); if(!b) return null;
+    const per=currentPerson(), c=cellAt(b.x+b.w/2,b.y+b.h/2), i=c.i, items=[];
+    const where=cungLabel(i);
+    if(i<0) items.push({ok:false,t:'NVS nằm ở Trung cung (giữa nhà) — kiêng.'});
+    else if(i===7) items.push({ok:false,t:'NVS nằm ở '+where+' (quý nhân, chủ nhà) — kiêng đặt nhà vệ sinh.'});
+    else if(i===3) items.push({ok:false,t:'NVS nằm ở '+where+' (tài lộc) — dễ “rò rỉ” tài lộc.'});
+    else if(i===4) items.push({ok:null,t:'NVS nằm ở '+where+' (hành Hỏa, danh tiếng): Thủy khắc Hỏa — cân nhắc.'});
+    else items.push({ok:true,t:'NVS nằm ở '+where+' ('+CUNG[i].y.toLowerCase()+'): không phạm cung kiêng.'});
+    if(per&&i>=0){
+      const d=per.dirs[i];
+      items.push(d.good?{ok:false,t:'NVS chiếm hướng tốt '+DIRS[i]+' ('+d.name+') của '+per.name+' — nên nhường chỗ cho phòng chính.'}
+                       :{ok:true,t:'NVS ở hướng xấu '+DIRS[i]+(d.short==='Tuyệt mệnh'?' (Tuyệt mệnh)':'')+' của '+per.name+' — hợp lý, “dùng hướng xấu để đặt chỗ ô uế”.'});
+    } else if(!per) items.push({t:'Chưa nhập tuổi gia chủ nên chưa xét hướng Bát trạch.'});
+    const k=byId('bep');
+    if(k){ const g=rectGap(b,k);
+      items.push(g<1?{ok:false,t:'NVS cách bếp chỉ '+fmtM(g)+' m — kỵ thủy hỏa xung khắc.'}:{ok:true,t:'NVS cách bếp '+fmtM(g)+' m — ổn.'}); }
+    return {items:items,cell:c};
+  }
+  function verdictOf(items){
+    if(items.some(x=>x.ok===false)) return 'bad';
+    if(items.some(x=>x.ok===null)) return 'warn';
+    return 'good';
+  }
+  const VERD={good:['Tốt, hợp','#1f7a44','✓'],warn:['Tạm ổn — cần cân nhắc','#b07a00','!'],bad:['Chưa hợp','#b3362d','✕']};
+
+  function sugCells(kind){
+    const per=currentPerson(), out=[];
+    for(let iy=0;iy<3;iy++) for(let ix=0;ix<3;ix++){
+      const i=cungOfCell(ix,iy); if(i<0||i===7) continue;
+      const hn=hanhOf(i); let s=0;
+      if(kind==='bep'){
+        s+=hn==='Hỏa'?3:hn==='Mộc'?2:hn==='Thổ'?1:-1;
+        if(per) s+=per.dirs[i].good?2:-1;
+      } else {
+        if(i===3) continue;
+        s+=(hn==='Kim'||hn==='Thủy')?2:hn==='Thổ'?1:hn==='Hỏa'?-1:0;
+        if(per) s+=per.dirs[i].good?-2:(per.dirs[i].short==='Tuyệt mệnh'?3:2);
+      }
+      out.push({ix:ix,iy:iy,i:i,s:s,key:ix+','+iy});
+    }
+    return out.filter(c=>c.s>=1).sort((a,b)=>b.s-a.s);
+  }
+  function sugText(kind){
+    const per=currentPerson(), L=sugCells(kind).slice(0,3);
+    if(!L.length) return 'Không có ô nào thật sự hợp trong nhà này — cân nhắc giữ vị trí hiện tại và hoá giải bằng cách bố trí.';
+    return L.map(c=>viTri(c.ix,c.iy)+' → '+cungLabel(c.i)+(per?' ('+per.dirs[c.i].short+')':'')).join('; ');
+  }
+
+  function drawFengBadges(){
+    const g=document.getElementById('fengBadgeG'); if(!g) return;
+    if(!feng||typeof planView==='undefined'||planView==='gac'){ g.innerHTML=''; return; }
+    let h='';
+    [['bep',checkBep()],['nvs',checkNvs()]].forEach(r=>{
+      const b=byId(r[0]); if(!r[1]||!b) return;
+      const v=VERD[verdictOf(r[1].items)], x=OX+(b.x+b.w)*SCALE-1, y=OY+b.y*SCALE+1;
+      h+='<circle cx="'+x+'" cy="'+y+'" r="8" fill="'+v[1]+'" stroke="#fff" stroke-width="1.5"/><text x="'+x+'" y="'+(y+3.6)+'" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">'+v[2]+'</text>';
+    });
+    g.innerHTML=h;
+  }
+
+  function placeCheckHtml(ctl){
+    const per=currentPerson();
+    const ICON={true:['✓','#1f7a44'],false:['✕','#b3362d'],'null':['!','#b07a00'],'undefined':['ℹ','#7a8790']};
+    let h='';
+    if(!per) h+='<div class="rnote" style="font-size:.78rem;color:var(--muted);margin-bottom:6px;">Đang xét theo cung vị và ngũ hành chung. Nhập năm sinh gia chủ ở mục “Cung vị” bên trên để xét thêm hướng tốt/xấu theo tuổi (Bát trạch).</div>';
+    [['Bếp','bep',checkBep()],['Nhà vệ sinh (NVS)','nvs',checkNvs()]].forEach(r=>{
+      if(!r[2]){ h+='<div style="margin:8px 0;"><b>'+r[0]+'</b>: không còn trên mặt bằng.</div>'; return; }
+      const v=VERD[verdictOf(r[2].items)];
+      h+='<div style="margin:10px 0;padding:8px 10px;border:1px solid var(--line);border-left:4px solid '+v[1]+';border-radius:8px;">'+
+         '<div><b>'+r[0]+'</b> — <span style="color:'+v[1]+';font-weight:700;">'+v[2]+' '+v[0]+'</span> <small style="color:var(--muted)">('+viTri(r[2].cell.ix,r[2].cell.iy)+')</small></div>';
+      r[2].items.forEach(it=>{ const ic=ICON[String(it.ok)]; h+='<div style="font-size:.8rem;margin:3px 0;"><span style="color:'+ic[1]+';font-weight:700;display:inline-block;width:16px;">'+ic[0]+'</span>'+escH(it.t)+'</div>'; });
+      if(r[1]==='bep'&&ctl){
+        const face=(feng.bepFace===undefined)?-1:feng.bepFace;
+        h+='<div style="margin:6px 0 2px;font-size:.8rem;">Người nấu quay mặt về hướng: <select data-face="1"><option value="-1">Chưa chọn</option>'+DIRS.map((d,k)=>'<option value="'+k+'"'+(face===k?' selected':'')+'>'+d+'</option>').join('')+'</select></div>';
+      }
+      h+='<div style="font-size:.78rem;margin-top:4px;color:var(--muted);"><b>Chỗ hợp hơn để đặt '+(r[1]==='bep'?'bếp':'NVS')+':</b> '+escH(sugText(r[1]))+'</div></div>';
+    });
+    h+='<div class="rnote" style="font-size:.74rem;color:var(--muted);">Kết quả dựa trên cung vị, ngũ hành (bếp thuộc Hỏa, nhà vệ sinh thuộc Thủy) và Bát trạch theo tuổi; chỉ mang tính tham khảo.</div>';
+    return h;
+  }
+  function renderPlaceCheck(){
+    const el=document.getElementById('placeCheckBody'); if(!el||!feng) return;
+    el.innerHTML=placeCheckHtml(true);
+  }
+  (function bindPlaceCheck(){
+    const body=document.getElementById('placeCheckBody'), hint=document.getElementById('fengHint');
+    body.addEventListener('change',e=>{
+      if(e.target.dataset.face){ feng.bepFace=parseInt(e.target.value,10); saveFeng(); drawFeng(); renderFengList(); }
+    });
+    hint.checked=feng.hint!==false;
+    hint.addEventListener('change',e=>{ feng.hint=e.target.checked; saveFeng(); drawFeng(); });
+  })();
+  syncFengUI();
 
   // Áp lại bộ màu đã lưu (nếu có) sau khi mọi thứ đã sẵn sàng, và đồng bộ toàn bộ giao diện lần đầu.
   applyTheme(currentTheme, false);
 
+})();
+</script>
+
+<script>
+(function(){
+  const KEY='gac_fengcheck_v1', root=document.getElementById('fgRoot');
+  const CELLS=['Bắc','Đông Bắc','Đông','Tây Bắc','Trung cung','Đông Nam','Tây','Tây Nam','Nam'];
+  const DIRS=['Bắc','Đông Bắc','Đông','Đông Nam','Nam','Tây Nam','Tây','Tây Bắc'];
+  const OPP={'Bắc':'Nam','Nam':'Bắc','Đông Bắc':'Tây Nam','Tây Nam':'Đông Bắc','Đông':'Tây','Tây':'Đông','Đông Nam':'Tây Bắc','Tây Bắc':'Đông Nam'};
+  const GOOD=[0,2,5,8];
+  const ITEMS={nvs:'🚽 NVS',bep:'🔥 Bếp',tulanh:'🧊 Tủ lạnh',giat:'🧺 Máy giặt',banan:'🍽 Bàn ăn',banTho:'🕯 Bàn thờ'};
+  let st={pos:{},face:'Đông',door:'Đông Bắc',dim:{L:9.2,W:3.6,C:1.4,inc:true},size:{}};
+  try{ const v=JSON.parse(localStorage.getItem(KEY)||'null'); if(v&&v.pos) st=Object.assign(st,v); }catch(e){}
+  st.dim=Object.assign({L:9.2,W:3.6,C:1.4,inc:true},st.dim||{}); st.size=st.size||{};
+  const DEFSZ={nvs:[1.4,1.8],bep:[0.6,2],tulanh:[0.7,0.7],giat:[0.6,0.6],banan:[1.2,0.8],banTho:[0.6,0.4]};
+  const szf=k=>st.size[k]||DEFSZ[k], f2=n=>String(Math.round(n*100)/100);
+  const cd=()=>({cw:(st.dim.W+(st.dim.inc?st.dim.C:0))/3,ch:st.dim.L/3});
+  const PI={W:'inRW',C:'inCOR',P1:'inP1',P2:'inPK'};
+  function pull(){ const g=id=>{const e=document.getElementById(id);return e?parseFloat(e.value):NaN;}; const w=g(PI.W),c=g(PI.C),a=g(PI.P1),b=g(PI.P2); if([w,c,a,b].every(isFinite)){ st.dim.W=w;st.dim.C=c;st.dim.P1=a;st.dim.P2=b;st.dim.L=Math.round((a+b)*100)/100; } }
+  function setPlan(k,v){ const e=document.getElementById(PI[k]); if(!e) return; e.value=v; e.dispatchEvent(new Event('input',{bubbles:true})); }
+  function save(){ try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){} }
+  function fromPlan(){
+    try{
+      const b=JSON.parse(localStorage.getItem('gac_editor_v3')||'[]'), hd=JSON.parse(localStorage.getItem('gac_house_dims_v1')||'null')||{rw:4,cor:1,p1:5,pk:5}, W=hd.rw+hd.cor, D=hd.p1+hd.pk;
+      const map={bep:/^bep$/,nvs:/^nvs$/,banan:/^f_deskeat$/,giat:/^f_washer$/,tulanh:/lạnh/i,banTho:/thờ/i};
+      Object.keys(map).forEach(k=>{
+        const x=b.find(o=>map[k].test(k=='tulanh'||k=='banTho'?(o.label||''):(o.id||'')));
+        if(x){ const c=Math.min(2,Math.max(0,Math.floor((x.x+x.w/2)/W*3))), r=Math.min(2,Math.max(0,Math.floor((x.y+x.h/2)/D*3))); st.pos[k]=r*3+c; st.size[k]=[Math.round(x.w*100)/100,Math.round(x.h*100)/100]; }
+      });
+    }catch(e){}
+  }
+  function house_W(){ return 5; }
+  if(!st.dim.init){ st.dim.init=true; setPlan('W',3.6);setPlan('C',1.4);setPlan('P1',4.6);setPlan('P2',4.6); save(); }
+  pull();
+  if(!Object.keys(st.pos).length){ fromPlan(); st.pos.nvs=7; st.pos.bep=5; }
+  const rc=i=>[Math.floor(i/3),i%3], dist=(a,b)=>{const A=rc(a),B=rc(b);return Math.max(Math.abs(A[0]-B[0]),Math.abs(A[1]-B[1]));};
+  const opp=(a,b)=>a!==4&&a+b===8, R=(s,t,src)=>({s,t,src});
+  function rel(k,o,out,ctx){ // quan hệ với món o
+    const a=st.pos[k], b=st.pos[o]; if(a==null||b==null) return;
+    ctx(a,b,out);
+  }
+  function check(k){
+    const p=st.pos[k]; if(p==null) return null; const o=[], cn=CELLS[p], P=st.pos;
+    const near=(x)=>P[x]!=null&&dist(p,P[x])===1, same=(x)=>P[x]!=null&&P[x]===p&&x!==k, op=(x)=>P[x]!=null&&opp(p,P[x]);
+    if(k==='nvs'){
+      if(p===3) o.push(R('bad','Cung Tây Bắc: không đặt NVS','Zalo'));
+      else if(p===7) o.push(R('ok','Tây Nam: đúng vị trí vợ đã chốt','Zalo'));
+      else if(p===4) o.push(R('bad','Trung cung: tránh NVS giữa nhà','Chung'));
+      else if(GOOD.includes(p)) o.push(R('warn',cn+' là cung tốt của tuổi Ly, nên dành chỗ khác cho NVS','Chung'));
+      else o.push(R('ok',cn+' là cung xấu của tuổi, đặt NVS chấp nhận được','Chung'));
+    }
+    if(k==='bep'){
+      if(p===3) o.push(R('bad','Cung Tây Bắc: không đặt bếp','Zalo'));
+      else if(p===5) o.push(R('ok','Đông Nam: đúng vị trí vợ ghi (lưu ý: "chỗ bếp hơi khó")','Zalo'));
+      else if(p===4) o.push(R('bad','Trung cung: tránh bếp giữa nhà','Chung'));
+      else if(GOOD.includes(p)) o.push(R('ok',cn+' là cung tốt của tuổi Ly (chưa có trong ghi chú)','Chung'));
+      else o.push(R('warn',cn+' là cung xấu của tuổi, ngoài ghi chú — nên hỏi lại thầy','Chung'));
+      const f=st.face;
+      if(f==='Đông') o.push(R('ok','Người nấu quay lưng về Đông (sinh khí); tọa bếp phía Tây khớp cả hai nguồn','Thầy'));
+      else if(f==='Nam') o.push(R('ok','Người nấu quay lưng về Nam (phục vị)','Thầy'));
+      else if(f==='Đông Bắc'||f==='Đông Nam') o.push(R('warn','Tọa bếp rơi vào '+OPP[f]+' (khớp zalo) nhưng thầy chỉ ghi lưng quay Đông hoặc Nam','Zalo'));
+      else o.push(R('warn','Lưng người nấu quay '+f+': ngoài ghi chú của thầy (Đông/Nam)','Thầy'));
+    }
+    if(k==='nvs'||k==='bep'){ const x=k==='nvs'?'bep':'nvs';
+      if(same(x)) o.push(R('bad','Cùng ô với '+ITEMS[x],'Thầy'));
+      else if(op(x)) o.push(R('bad','Đối diện '+ITEMS[x]+' — thầy dặn tránh NVS đối diện bếp','Thầy'));
+      else if(near(x)) o.push(R('warn','Kề '+ITEMS[x]+': giữ vách ngăn kín (vợ ghi "vẫn để vách ngăn")','Zalo'));
+    }
+    if(k==='tulanh'||k==='giat'){
+      if(same('bep')) o.push(R('bad','Cùng ô với bếp (thủy hỏa xung)','Chung'));
+      else if(near('bep')) o.push(R('warn','Kề bếp: nên có vách hoặc cách xa','Chung'));
+      else o.push(R('ok','Không sát bếp','Chung'));
+    }
+    if(k==='banan'){
+      if(same('nvs')) o.push(R('bad','Cùng ô với NVS','Chung'));
+      else if(op('nvs')) o.push(R('warn','Đối diện NVS','Chung'));
+      else if(P.bep!=null&&dist(p,P.bep)<=1) o.push(R('ok','Gần bếp, thuận tiện','Chung'));
+      else o.push(R('ok','Không vướng NVS','Chung'));
+    }
+    if(k==='banTho'){
+      if(same('nvs')||same('bep')) o.push(R('bad','Cùng ô với bếp/NVS — không nên','Chung'));
+      else if(near('nvs')) o.push(R('warn','Kề NVS: tránh chung vách','Chung'));
+      if(GOOD.includes(p)) o.push(R('ok',cn+' là cung tốt của tuổi Ly','Chung'));
+      else o.push(R('warn',cn+' ngoài nhóm cung tốt (Bắc/Đông/Đông Nam/Nam)','Chung'));
+    }
+    { const z=szf(k), c=cd(), fit=(z[0]<=c.cw&&z[1]<=c.ch)||(z[0]<=c.ch&&z[1]<=c.cw);
+      if(!fit) o.push(R('warn','Kích thước '+z[0]+'×'+z[1]+' m lớn hơn 1 cung ('+f2(c.cw)+'×'+f2(c.ch)+' m) — sẽ chiếm sang cung bên cạnh','Chung')); }
+    return o;
+  }
+  function doorCheck(){
+    const d=st.door;
+    if(d==='Đông Bắc') return [R('ok','Nhà hướng Đông Bắc — thầy ghi "hợp"','Thầy'),R('warn','Bảng Bát trạch thuần cung Ly chỉ tính Đông/ĐN/Bắc/Nam là tốt; thầy đã ghi hợp nên theo thầy, chỗ này nên hỏi lại','Chung')];
+    if(['Đông','Đông Nam','Bắc','Nam'].includes(d)) return [R('ok','Hướng tốt của cung Ly (Bát trạch)','Chung')];
+    if(d==='Tây Bắc') return [R('bad','Tuyệt mệnh với cung Ly — vợ cũng ghi không đặt Tây Bắc','Zalo')];
+    return [R('warn','Hướng xấu của cung Ly, ngoài ghi chú','Chung')];
+  }
+  const IC={ok:'✅',warn:'⚠️',bad:'❌'};
+  function li(r){ return '<li>'+IC[r.s]+' '+r.t+'<span class="src">'+r.src+'</span></li>'; }
+  function worst(a){ return !a?'':a.some(r=>r.s==='bad')?'bad':a.some(r=>r.s==='warn')?'warn':'ok'; }
+  function inp(attr,v){ return '<input type="number" step="0.05" min="0.1" '+attr+' value="'+v+'" style="width:100%;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:inherit">'; }
+  function dimPanel(){
+    const d=st.dim, c=cd(), tw=d.W+(d.inc?d.C:0);
+    let h='<div class="panel"><h3 style="margin:0 0 8px;font-size:.95rem">Kích thước nhà (m) — đồng bộ với tab Mặt bằng</h3><div class="row2" style="grid-template-columns:repeat(2,1fr);gap:10px">'+
+     '<div class="field"><label>Ngang phòng</label>'+inp('data-d="W"',d.W)+'</div><div class="field"><label>Đường luồng</label>'+inp('data-d="C"',d.C)+'</div>'+
+     '<div class="field"><label>Phòng 1 dài</label>'+inp('data-d="P1"',d.P1)+'</div><div class="field"><label>Phòng kề dài</label>'+inp('data-d="P2"',d.P2)+'</div></div>'+
+     '<div style="font-size:.78rem;margin:6px 0">Tổng chiều dài: <b>'+f2(d.L)+' m</b> (Phòng 1 + Phòng kề)</div>'+
+     '<label class="checkrow"><input type="checkbox" id="fgInc"'+(d.inc?' checked':'')+'><span>Chia 9 cung gồm cả đường luồng</span></label>'+
+     '<div class="note" style="margin:0 0 12px">Vùng chia cung: <b>'+f2(tw)+' × '+f2(d.L)+' m = '+f2(tw*d.L)+' m²</b> → mỗi cung <b>'+f2(c.cw)+' × '+f2(c.ch)+' m = '+f2(c.cw*c.ch)+' m²</b>.</div>'+
+     '<h3 style="margin:0 0 8px;font-size:.95rem">Kích thước từng khu vực (rộng × dài, m)</h3>';
+    Object.keys(ITEMS).forEach(k=>{ const z=szf(k); h+='<div style="display:grid;grid-template-columns:110px 1fr 1fr;gap:8px;align-items:center;margin-bottom:6px;font-size:.84rem"><span>'+ITEMS[k]+'</span>'+inp('data-s="'+k+':0"',z[0])+inp('data-s="'+k+':1"',z[1])+'</div>'; });
+    return h+'<div style="font-size:.74rem;color:var(--muted)">Đồ lớn hơn 1 cung hoặc tổng đồ vượt diện tích cung sẽ được cảnh báo (số đỏ ở góc ô).</div></div>';
+  }
+  function sumLine(){ const n={ok:0,warn:0,bad:0}; doorCheck().concat(...Object.keys(ITEMS).map(k=>check(k)||[])).forEach(r=>n[r.s]++); const un=Object.keys(ITEMS).filter(k=>st.pos[k]==null).length; return '<div style="margin-bottom:10px;font-size:.9rem;font-weight:600">✅ '+n.ok+' · ⚠️ '+n.warn+' · ❌ '+n.bad+(un?' · chưa đặt '+un+' món':'')+'</div>'; }
+  function render(){
+    pull();
+    const inCell=i=>Object.keys(st.pos).filter(k=>st.pos[k]===i);
+    const chip=k=>{const c=check(k);return '<span class="chip '+worst(c)+'" data-k="'+k+'">'+ITEMS[k]+' '+f2(szf(k)[0])+'×'+f2(szf(k)[1])+'</span>';};
+    let g='';
+    CELLS.forEach((n,i)=>{ g+='<div class="cell '+(i===4?'c':GOOD.includes(i)?'g':i===3?'r':'')+'" data-cell="'+i+'">'+(function(){const c=cd(),ar=c.cw*c.ch,u=inCell(i).reduce((a,k)=>a+szf(k)[0]*szf(k)[1],0);return '<b>'+n+'<br><span style="font-weight:400">'+f2(c.cw)+'×'+f2(c.ch)+' m · '+f2(ar)+' m²</span>'+(u?'<br><span style="font-weight:400;color:'+(u>ar?'var(--sel)':'var(--muted)')+'">đồ: '+f2(u)+' m²</span>':'')+'</b>';})()+inCell(i).map(chip).join('')+'</div>'; });
+    const tray=Object.keys(ITEMS).filter(k=>st.pos[k]==null).map(chip).join('')||'<span style="font-size:.76rem;color:var(--muted)">Tất cả đã đặt — kéo để đổi chỗ, kéo về đây để bỏ ra</span>';
+    const sel=(id,v)=>'<select id="'+id+'" style="width:100%;padding:7px 8px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:inherit">'+DIRS.map(d=>'<option'+(d===v?' selected':'')+'>'+d+'</option>').join('')+'</select>';
+    let res='<ul>'+doorCheck().map(li).join('')+'</ul>';
+    let html='<div class="panel"><h2 style="margin:0 0 6px;font-size:1.05rem">Phong thủy riêng — Tân Mùi, cung Ly</h2>'+
+     '<div class="sub" style="margin:0">Theo giấy thầy ghi + tin nhắn Zalo của vợ. Đông tứ mệnh: hướng tốt <b>Đông</b> (sinh khí), <b>Đông Nam</b> (thiên y), <b>Bắc</b> (diên niên), <b>Nam</b> (phục vị); xấu nhất <b>Tây Bắc</b>.</div></div>'+
+     '<div class="panel"><div class="front">▲ MẶT TIỀN — cửa chính hướng Đông Bắc ▲</div><div class="grid" id="fgGrid">'+g+'</div>'+
+     '<div style="font-size:.75rem;color:var(--muted);text-align:center">Lưới 9 cung xoay theo nhà hướng Đông Bắc (như video trong Zalo). Xanh = cung tốt của tuổi, đỏ = Tây Bắc.</div>'+
+     '<div class="tray" id="fgTray" style="margin-top:10px">'+tray+'</div>'+
+     '<div class="row2" style="margin-top:12px"><div class="field"><label>Hướng cửa chính (nhà quay mặt về)</label>'+sel('fgDoor',st.door)+'</div>'+
+     '<div class="field"><label>Người nấu quay lưng về (miệng lò)</label>'+sel('fgFace',st.face)+'</div></div>'+
+     '<div class="btnrow"><button id="fgPlan">↻ Lấy vị trí từ tab Mặt bằng</button><button class="danger" id="fgReset">Xoá hết</button></div></div>'+
+     dimPanel()+'<div class="panel"><h3 style="margin:0 0 6px;font-size:.95rem">Kết quả</h3>'+sumLine()+'<div class="res"><b>Hướng cửa</b>'+res+'</div>';
+    Object.keys(ITEMS).forEach(k=>{ const c=check(k); html+='<div class="res"><b>'+ITEMS[k]+'</b>'+(c?'<ul>'+c.map(li).join('')+'</ul>':'<div style="color:var(--muted)">Chưa đặt</div>')+'</div>'; });
+    html+='<div style="font-size:.74rem;color:var(--muted)">Nhãn: <span class="src">Thầy</span> giấy thầy ghi · <span class="src">Zalo</span> tin nhắn vợ · <span class="src">Chung</span> nguyên tắc chung do mình bổ sung (không có trong ghi chú — chỉ tham khảo).</div></div>'+
+     '<div class="panel"><h3 style="margin:0 0 6px;font-size:.95rem">Ghi chú thầy (mình chép lại từ chữ viết tay)</h3><ul class="notes">'+
+     '<li>Tuổi Tân Mùi, 36 tuổi, mạng Thổ, cung Ly (Đông mạng). Nhà xây hướng Đông Bắc: hợp.</li>'+
+     '<li>Bếp: người nấu xoay lưng hướng <b>Đông</b> (sinh khí) hoặc <b>Nam</b> (phục vị). Tránh phạm NVS, bể nước, đường đi đối diện bếp.</li>'+
+     '<li>Giường: xoay chân về Đông, Bắc hoặc Nam; không xoay đầu ra đường.</li>'+
+     '<li>Màu sơn: nhà trắng; cổng ngõ và phòng ngủ hồng lẻ (sinh Thổ) hoặc vàng lẻ, mỡ gà.</li>'+
+     '<li>Bàn làm việc: Tây Nam, Tây Bắc (dòng này chữ khó đọc, bạn kiểm tra lại).</li>'+
+     '<li>Tu sửa: 16/8 hoặc 20/8 năm Bính Ngọ, 7h15 khởi lễ, làm hướng Tây Nam trước; hoặc 4/9, 7h15, Tây Bắc trước.</li>'+
+     '<li>Nhập trạch: 9/10 năm Bính Ngọ, 5h30–6h sáng. Cúng an vị Thiên sứ, Thổ địa, Táo quân; nấu nước ở bếp; đem thùng gạo, muối, nước qua trước. Trước đó quét dọn sạch, 10h–11h soạn mâm cúng đất và tân gia.</li>'+
+     '<li>Zalo vợ: bếp và WC không đặt cung Tây Bắc; NVS ở Tây Nam; bếp ở Đông Nam; vẫn để vách ngăn giữa bếp và NVS.</li></ul>'+
+     '<div class="note">Mình đọc chữ viết tay nên vài chỗ có thể lệch (nhất là ngày tháng, dòng bàn làm việc, tên các vị cúng). Đối chiếu lại giấy gốc trước khi làm.</div></div>';
+    root.innerHTML=html; bind();
+  }
+  function popup(title,items,undo){
+    const bad=items.some(r=>r.s==='bad'), old=document.getElementById('fgPop'); if(old) old.remove();
+    const d=document.createElement('div'); d.id='fgPop'; d.style.cssText='position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:16px';
+    d.innerHTML='<div style="background:var(--panel);color:var(--ink);border:2px solid '+(bad?'#d0463a':'#d9a21b')+';border-radius:14px;max-width:420px;width:100%;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.35)"><div style="font-weight:700;font-size:1rem;margin-bottom:8px">'+(bad?'❌':'⚠️')+' '+title+'</div><div style="font-size:.78rem;color:var(--muted);margin-bottom:6px">Lý do:</div><ul style="padding:0;margin:0;font-size:.86rem;line-height:1.55">'+items.map(li).join('')+'</ul><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px">'+(undo?'<button id="fgUndo">↩ Hoàn tác</button>':'')+'<button id="fgKeep">Giữ nguyên</button></div></div>';
+    document.body.appendChild(d);
+    const close=()=>d.remove();
+    d.onclick=e=>{ if(e.target===d) close(); };
+    d.querySelector('#fgKeep').onclick=close;
+    if(undo) d.querySelector('#fgUndo').onclick=()=>{ close(); undo(); };
+  }
+  function warnItem(k,prev){
+    const p=st.pos[k]; if(p==null) return;
+    const bad=(check(k)||[]).filter(r=>r.s!=='ok'); if(!bad.length) return;
+    popup(ITEMS[k]+' → '+CELLS[p]+(bad.some(r=>r.s==='bad')?': không hợp':': cần cân nhắc'),bad,()=>{ if(prev==null) delete st.pos[k]; else st.pos[k]=prev; save(); render(); });
+  }
+  function bind(){
+    document.getElementById('fgDoor').onchange=e=>{const pv=st.door; st.door=e.target.value;save();render(); const it=doorCheck().filter(r=>r.s!=='ok'); if(it.length) popup('Hướng cửa chính: '+st.door,it,()=>{st.door=pv;save();render();});};
+    document.getElementById('fgFace').onchange=e=>{const pv=st.face; st.face=e.target.value;save();render(); const it=(check('bep')||[]).filter(r=>r.s!=='ok'); if(it.length) popup('Bếp, người nấu quay lưng về '+st.face,it,()=>{st.face=pv;save();render();});};
+    document.getElementById('fgReset').onclick=()=>{st.pos={};save();render();};
+    document.getElementById('fgPlan').onclick=()=>{st.pos={};fromPlan();save();render();};
+    const num=i=>parseFloat(String(i.value).replace(',','.'));
+    root.querySelectorAll('[data-d]').forEach(i=>i.onchange=()=>{const v=num(i); if(v>0){setPlan(i.dataset.d,v);pull();save();render();}});
+    root.querySelectorAll('[data-s]').forEach(i=>i.onchange=()=>{const a=i.dataset.s.split(':'),v=num(i); if(v>0){const z=(szf(a[0])).slice(); z[+a[1]]=v; st.size[a[0]]=z; save(); render();}});
+    document.getElementById('fgInc').onchange=e=>{st.dim.inc=e.target.checked;save();render();};
+    root.querySelectorAll('.chip').forEach(el=>{
+      el.addEventListener('pointerdown',e=>{
+        e.preventDefault(); const k=el.dataset.k; el.setPointerCapture(e.pointerId);
+        const gh=document.createElement('div'); gh.className='fgghost'; gh.textContent=el.textContent; document.body.appendChild(gh);
+        const mv=ev=>{gh.style.left=(ev.clientX-30)+'px';gh.style.top=(ev.clientY-40)+'px';}; mv(e);
+        el.addEventListener('pointermove',mv);
+        const up=ev=>{
+          el.removeEventListener('pointermove',mv); el.removeEventListener('pointerup',up); gh.remove();
+          const t=document.elementFromPoint(ev.clientX,ev.clientY), c=t&&t.closest('[data-cell]'), tr=t&&t.closest('#fgTray');
+          const prev=st.pos[k]; if(c) st.pos[k]=+c.dataset.cell; else if(tr) delete st.pos[k];
+          save(); render(); if(c&&st.pos[k]!==prev) warnItem(k,prev);
+        };
+        el.addEventListener('pointerup',up);
+      });
+    });
+  }
+  window.__fengCheck={get:()=>st,set:v=>{ if(v&&v.pos){ st=Object.assign(st,v); st.dim=Object.assign({L:9.2,W:3.6,C:1.4,inc:true},v.dim||{}); st.dim.init=true; st.size=v.size||{}; save(); render(); } }};
+  render();
+  document.querySelector('[data-tab="fengcheck"]').addEventListener('click',render);
+})();
+</script>
+
+<script>
+(function(){
+  const KEY='gac_rental_v1', root=document.getElementById('rtRoot');
+  const F=[['n','Số phòng',2,1,'phòng'],['cap','Vốn sửa mỗi phòng',40,1,'triệu'],['old','Giá thuê hiện tại mỗi phòng (0 nếu đang trống)',0,0.1,'tr/tháng'],['rent','Giá thuê sau sửa mỗi phòng',4,0.1,'tr/tháng'],
+    ['vac','Tháng trống mỗi năm',1,0.5,'tháng'],['opex','Sửa vặt, bảo trì mỗi phòng',3,0.5,'tr/năm'],['util','Điện nước bạn bao mỗi phòng',0,0.1,'tr/tháng'],['build','Tháng thi công (không thu)',1,0.5,'tháng'],
+    ['target','Thời gian muốn hoàn vốn',12,1,'tháng'],['H','Xem lãi sau',24,1,'tháng'],['lo','Lãi suất thấp (chi phí vốn)',10,0.5,'%/năm'],['hi','Lãi suất cao',15,0.5,'%/năm']];
+  let v={}; F.forEach(f=>v[f[0]]=f[2]);
+  try{ const x=JSON.parse(localStorage.getItem(KEY)||'null'); if(x) Object.assign(v,x); }catch(e){}
+  const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(v));}catch(e){}};
+  const r1=x=>Math.round(x*10)/10, tr=x=>(x<0?'−':'')+Math.abs(r1(x)).toLocaleString('vi-VN')+' tr';
+  const mo=x=>isFinite(x)?r1(x).toLocaleString('vi-VN')+' tháng':'không hoàn vốn';
+  function calc(){
+    const occ=(12-v.vac)/12, inc=Math.max(0,v.rent-v.old);
+    const netRoom=inc*occ-v.opex/12-v.util, net=netRoom*v.n, C=v.cap*v.n;
+    const K=i=>C*Math.pow(1+i/1200,v.build);
+    const pay=i=>{ if(net<=0) return Infinity; const r=i/1200; if(r===0) return v.build+C/net; const k=K(i); if(k*r>=net) return Infinity; return v.build-Math.log(1-k*r/net)/Math.log(1+r); };
+    const bal=(i,m)=>{ const r=i/1200; let b=-C; for(let t=1;t<=m;t++) b=b*(1+r)+(t>v.build?net:0); return b; };
+    const need=i=>{ const N=v.target-v.build; if(N<=0) return NaN; const r=i/1200; const nn=r===0?C/N:K(i)*r/(1-Math.pow(1+r,-N)); return (nn/v.n+v.opex/12+v.util)/occ+v.old; };
+    return {occ,inc,netRoom,net,C,pay,bal,need};
+  }
+  function render(){
+    const c=calc(), rates=[0,v.lo,v.hi], nm=['Không tính lãi','Lãi '+v.lo+'%/năm','Lãi '+v.hi+'%/năm'];
+    const ok=(m)=>isFinite(m)&&m<=v.target+1e-9?'<span class="pos">✅</span>':'<span class="neg">⚠️</span>';
+    let h='<div class="panel"><h2 style="margin:0 0 6px;font-size:1.05rem">Tính cho thuê & hoàn vốn</h2><div class="sub" style="margin:0 0 10px">Chỉnh số rồi xem kết quả ngay. "Lãi suất" là chi phí của số vốn bỏ vào sửa nhà (tiền vay hoặc lãi bạn kỳ vọng nếu gửi/đầu tư chỗ khác).</div><div class="row2" style="grid-template-columns:repeat(2,1fr);gap:10px">';
+    F.forEach(f=>{ h+='<div class="field"><label>'+f[1]+' ('+f[4]+')</label><input type="number" data-k="'+f[0]+'" step="'+f[3]+'" value="'+v[f[0]]+'" style="width:100%;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:inherit"></div>'; });
+    h+='</div><div style="margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);font-size:.84rem">Lấy vốn từ tab Báo giá thầu: gán <input type="number" id="rtPct" value="'+(v.pct||30)+'" style="width:60px;padding:4px"> % tổng chi phí cho các phòng thuê, theo <select id="rtSrc"><option value="0">giá thầu</option><option value="1">giá mục tiêu</option></select> <button id="rtApply">Áp dụng</button><div style="font-size:.74rem;color:var(--muted);margin-top:4px">Tổng chi phí gồm cả căn nhà để ở, nên chỉ gán phần của phòng thuê. Kết quả chia đều vào ô "Vốn sửa mỗi phòng".</div></div></div>';
+    h+='<div class="panel"><h3 style="margin:0 0 4px;font-size:.95rem">Kết quả</h3><div class="kpis">'+
+      '<div class="kpi">Tổng vốn<b>'+tr(c.C)+'</b></div><div class="kpi">Thu ròng mỗi phòng/tháng<b class="'+(c.netRoom>0?'':'neg')+'">'+tr(c.netRoom)+'</b></div><div class="kpi">Thu ròng cả nhà/tháng<b>'+tr(c.net)+'</b></div><div class="kpi">Tỷ lệ lấp đầy<b>'+Math.round(c.occ*100)+'%</b></div></div>'+
+      '<table><tr><th>Hoàn vốn</th><th>Thời gian</th><th>Mục tiêu '+v.target+' th.</th></tr>'+
+      rates.map((i,k)=>{const m=c.pay(i);return '<tr><td>'+nm[k]+'</td><td><b>'+mo(m)+'</b></td><td>'+ok(m)+'</td></tr>';}).join('')+'</table>'+
+      '<div style="font-size:.74rem;color:var(--muted)">Thời gian đã gồm '+v.build+' tháng thi công. Dòng có lãi: vốn bỏ ra bị tính lãi liên tục, nên lâu hơn dòng không lãi.</div></div>';
+    h+='<div class="panel"><h3 style="margin:0 0 4px;font-size:.95rem">Giá thuê tối thiểu để hoàn vốn trong '+v.target+' tháng</h3><table><tr><th>Mỗi phòng</th><th>Giá thuê cần</th><th>So với '+v.rent+' tr</th></tr>'+
+      rates.map((i,k)=>{const n=c.need(i);const d=n-v.rent;return '<tr><td>'+nm[k]+'</td><td><b>'+(isFinite(n)?r1(n)+' tr/tháng':'—')+'</b></td><td class="'+(d>0?'neg':'pos')+'">'+(isFinite(n)?(d>0?'thiếu '+r1(d):'dư '+r1(-d))+' tr':'')+'</td></tr>';}).join('')+'</table>'+
+      '<div style="font-size:.74rem;color:var(--muted)">Đã tính tháng trống, sửa vặt và điện nước bạn bao. Thời gian mục tiêu phải lớn hơn tháng thi công.</div></div>';
+    const rows=[6,12,18,24,36].concat([v.H]).filter((x,i,a)=>a.indexOf(x)===i).sort((a,b)=>a-b);
+    h+='<div class="panel"><h3 style="margin:0 0 4px;font-size:.95rem">Lãi / lỗ tích lũy (sau khi trừ vốn)</h3><table><tr><th>Sau</th>'+nm.map(x=>'<th>'+x+'</th>').join('')+'</tr>'+
+      rows.map(m=>'<tr'+(m===v.H?' style="font-weight:700"':'')+'><td>'+m+' tháng</td>'+rates.map(i=>{const b=c.bal(i,m);return '<td class="'+(b>=0?'pos':'neg')+'">'+(b>=0?'+':'')+tr(b)+'</td>';}).join('')+'</tr>').join('')+'</table>'+
+      '<div style="font-size:.74rem;color:var(--muted)">Số dương = đã thu hồi vốn và còn lãi (đã trừ chi phí vốn). Số âm = chưa hoàn vốn. Với cột có lãi, phần tiền dư sau khi hoàn vốn cũng được tính sinh lãi cùng mức, nên về sau có thể cao hơn cột không lãi. Chưa tính thuế và rủi ro nợ tiền thuê.</div></div>';
+    root.innerHTML=h;
+    root.querySelector('#rtApply').onclick=()=>{ if(!window.__quote){return;} const p=parseFloat(root.querySelector('#rtPct').value)||0, t=window.__quote.total(root.querySelector('#rtSrc').value==='1'); v.pct=p; v.cap=Math.round(t*p/100/v.n/1e5)/10; save(); render(); };
+    root.querySelectorAll('input[data-k]').forEach(el=>el.onchange=()=>{const x=parseFloat(String(el.value).replace(',','.')); if(isFinite(x)&&x>=0){v[el.dataset.k]=x; if(v.n<1)v.n=1; save(); render();}});
+  }
+  window.__rental={get:()=>v,set:x=>{ if(x&&typeof x==='object'){Object.assign(v,x);save();render();} }};
+  render();
+  document.querySelector('[data-tab="rental"]').addEventListener('click',render);
+})();
+</script>
+
+<script>
+(function(){
+  const KEY='gac_quote_v1', root=document.getElementById('qtRoot');
+  const Q=[
+   [1,'Đập phá tường + vận chuyển','m²',40.32,200000,'ok',0,'Khớp bóc tách (7,82+12,5+6+4,8+2,2+7). Đã gồm vận chuyển nhưng mục 17 lại có "vận chuyển xà bần" — hỏi có trùng không.'],
+   [2,'Xây tô tường vách ngăn','m²',18.13,850000,'warn',600000,'Thầu tự ghi "chưa rõ". 850k/m² cao hơn mức xây tô phổ biến (tham khảo 400–650k, nên so thêm 2 báo giá). Hỏi: dày bao nhiêu, vật liệu gì, có gồm bít cửa 2,46 m² không.'],
+   [3,'Trần thạch cao (4 phòng)','m²',70,165000,'warn',0,'Không có trong bóc tách. Xin khối lượng từng phòng, loại trần (phẳng/thả), khung xương.'],
+   [4,'Vách thạch cao','m²',8.75,220000,'warn',0,'Không có trong bóc tách, thầu ghi "chưa rõ". Hỏi vị trí; có trùng với tường xây ở mục 2 không.'],
+   [5,'Sơn nước có bả matit (tính theo m² sàn: phòng trước + mặt tiền)','m²',51.2,310000,'warn',0,'Không có dòng trong bóc tách. 310k/m² sàn rất cao so với mục 6 (50k/m²). Hỏi gồm hạng mục nào và có trùng với 389,7 m² ở mục 6 không — nếu trùng có thể bớt tới ~15,9 tr.'],
+   [6,'Sơn nước','m²',389.7,50000,'warn',0,'Khớp bóc tách (220+104,5+11,2+31,5+22,5). 50k/m² thấp: hỏi hãng sơn, số lớp, có bả không. Kiểm tra trùng với mục 5.'],
+   [7,'Cầu thang sắt, bậc gỗ sồi công nghiệp','m',4.6,1800000,'warn',0,'Thầu ghi "tận dụng thang cũ làm lại": nếu tận dụng thì xin giảm giá. Xác nhận 4,6 m là chiều dài hay số bậc.'],
+   [8,'Ốp men toilet + nền','m²',56.748,450000,'warn',0,'Bóc tách cộng ra 61,07 m² nhưng báo giá chỉ tính 56,75 m² (thiếu hiên nhà 4,32 m², đã thêm ở phần bổ sung). Ốp toilet chỉ 18,5 m² cho 3 toilet có vẻ ít — kiểm lại. Hỏi loại gạch, keo, chống thấm.'],
+   [9,'Bồn rửa tay + vòi nóng lạnh + ống xả (phòng ở)','cái',1,1500000,'warn',0,'Chỉ 1 bồn rửa tay (phòng ở). Phòng thuê chưa có lavabo — xác nhận có chủ ý không.'],
+   [10,'Mặt đá granit kim sa đen bồn rửa mặt 1m × 0,62m (gồm khung sắt)','cái',1,1900000,'ok',0,''],
+   [11,'Vòi sen tắm nóng lạnh','bộ',3,1400000,'warn',0,'Thầu ghi: phòng ở dùng gián tiếp, phòng thuê dùng trực tiếp. Báo giá KHÔNG có bình/máy nước nóng — xem phần bổ sung.'],
+   [12,'Gương soi 0,6 × 0,45','cái',3,250000,'ok',0,''],
+   [13,'Cửa khung sắt + kính cường lực','m²',21.8175,1700000,'warn',0,'Hạng mục lớn nhất (~17%). Khớp bóc tách 21,82 m². Cửa sổ 3,64 + 1,4 m² (≈ 8,6 tr) là phần bạn có thể xét giảm. Xác nhận 2 cửa đi 1×2,05 là cửa nào, không trùng 2 bộ composite ở mục 15.'],
+   [14,'Điện nước (khoán theo m²)','m²',100,210000,'warn',18000000/100,'Bạn muốn giảm: yêu cầu bóc tách theo điểm (ổ cắm, công tắc, đèn, điểm nước), loại dây/ống, và có gồm thiết bị điện (đèn, aptomat) không. Giá mục tiêu là số thử, sửa tuỳ ý.'],
+   [15,'Cửa phòng composite có khoá tay gạt (1 phòng tắm + 1 phòng ngủ)','bộ',2,4100000,'warn',3000000,'4,1 tr/bộ cao (tab Dự toán đang dùng composite 1,1 tr/m² ≈ 1,5–2 tr/bộ). Chỉ 2 bộ trong khi có 3 toilet, 4 phòng: kiểm tra cửa các phòng còn lại.'],
+   [16,'Sơn chống thấm phía sau nhà','m²',110,110000,'warn',0,'Không có trong bóc tách. 110 m² lớn hơn nhiều so với mặt bằng (khoảng 46 m²): hỏi vị trí (tường ngoài, sân thượng, mái?), loại chống thấm, thời gian bảo hành.'],
+   [17,'Vận chuyển xà bần','gói',1,1500000,'warn',0,'Gói 1,5 tr khá thấp cho ~40 m² tường đập + gạch/bồn/cửa cũ, dễ phát sinh. Hỏi số chuyến, có tính phí đổ bãi không.'],
+   [18,'Khung tủ bếp + đá granit kim sa đen dài 1,8 m','bộ',3,3000000,'ok',0,'Giá hợp lý. Xác nhận 3 bếp (nhà ở + 2 phòng thuê).'],
+   [19,'Bồn rửa chén + vòi','bộ',3,950000,'ok',0,''],
+   [20,'Bồn vệ sinh (bồn cầu)','bộ',3,2000000,'ok',0,'Tab Dự toán đang dùng 2,8 tr/bộ — xác nhận hãng, loại 1 khối hay 2 khối.']];
+  const ADD=[['Ốp lát hiên nhà (bóc tách có 4,32 m², báo giá chưa tính)','m²',4.32,450000,1,1],
+   ['Điều hoà (thầu ghi chưa gồm) — 3 máy theo tab Dự toán','máy',3,9000000,1,0],
+   ['Bình nóng lạnh (tab Dự toán đang tính 1 cái)','cái',3,2500000,1,0],
+   ['Quạt hút NVS','cái',3,450000,1,0],
+   ['Đèn, quạt trần, thiết bị điện hoàn thiện (nếu mục 14 không gồm)','gói',1,4000000,1,0],
+   ['Vệ sinh sau thi công','gói',1,800000,1,0],
+   ['Nội thất, đồ dùng rời (theo tab Dự toán, mặc định tắt)','gói',1,29200000,0,0]];
+  const ASK=['Mục 14 điện nước: bóc tách theo điểm, có gồm đèn/aptomat/dây tiếp địa không?','Mục 5 và 6: sơn có chồng lên nhau không (51,2 m² sàn so với 389,7 m² tường)?','Mục 3, 4, 5, 16: xin bóc tách khối lượng vì chưa có trong bảng bóc tách.','Mục 2: đơn giá 850k/m² gồm những gì? Tường dày bao nhiêu?','Bình/máy nước nóng, điều hoà: ai cung cấp, giá bao nhiêu?','Có xuất hoá đơn VAT không (báo giá ghi chưa gồm VAT)?','Chia đợt thanh toán theo nghiệm thu, giữ lại 5–10% đến hết thời gian bảo hành.','Tiến độ ngày bắt đầu và hoàn thành, mức phạt nếu trễ, bảo hành từng hạng mục.','Phát sinh: mọi hạng mục ngoài báo giá phải có xác nhận bằng văn bản trước khi làm.'];
+  let v={pay:[30,30,30,10],q:{},add:ADD.map(a=>({n:a[0],u:a[1],qty:a[2],price:a[3],on:!!a[4],vat:!!a[5]})),vatOn:true,vat:8,cont:10};
+  Q.forEach(r=>v.q[r[0]]={qty:r[3],price:r[4],tgt:Math.round(r[6]*(r[6]<1000?r[3]:1)),on:true});
+  try{ const x=JSON.parse(localStorage.getItem(KEY)||'null'); if(x){ Object.assign(v,x); } }catch(e){}
+  const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(v));}catch(e){}};
+  const fm=n=>Math.round(n).toLocaleString('vi-VN'), tr=n=>(Math.round(n/1e5)/10).toLocaleString('vi-VN')+' tr';
+  const IC={ok:'✅',warn:'⚠️'};
+  function totals(useT){
+    let a=0; Q.forEach(r=>{const x=v.q[r[0]]; if(x.on) a+=x.qty*((useT&&x.tgt>0)?x.tgt:x.price);});
+    let b=0,bv=0; v.add.forEach(x=>{ if(x.on){ const t=x.qty*x.price; b+=t; if(x.vat) bv+=t; } });
+    const vat=v.vatOn?(a+bv)*v.vat/100:0, sub=a+b, cont=(sub+vat)*v.cont/100;
+    return {a,b,vat,cont,total:sub+vat+cont};
+  }
+  function render(){
+    const T0=totals(false), T1=totals(true);
+    let h='<div class="panel"><h2 style="margin:0 0 6px;font-size:1.05rem">Báo giá thầu — Mr Hùng</h2><div class="sub" style="margin:0">Nhập từ file BẢNG_TÍNH_NHÀ_MR_HÙNG.xls (20 hạng mục, tổng thầu ghi 212.213.000 đ chưa VAT, chưa điều hoà). Mình đã cộng lại từng dòng: phép tính đúng, tổng lệch 150 đ do làm tròn. Sửa số lượng, đơn giá hoặc giá mục tiêu để so sánh.</div></div>';
+    h+='<div class="panel"><h3 style="margin:0 0 6px;font-size:.95rem">Tổng hợp</h3><div class="sc"><table style="min-width:0"><tr><th></th><th>Theo giá thầu</th><th>Theo giá mục tiêu</th></tr>'+
+      '<tr><td>Báo giá thầu (các mục đang bật)</td><td>'+fm(T0.a)+'</td><td>'+fm(T1.a)+'</td></tr>'+
+      '<tr><td>Bổ sung ngoài báo giá</td><td>'+fm(T0.b)+'</td><td>'+fm(T1.b)+'</td></tr>'+
+      '<tr><td>VAT <input type="checkbox" id="qVatOn"'+(v.vatOn?' checked':'')+'> <input type="number" class="q" id="qVat" value="'+v.vat+'" style="width:52px">% </td><td>'+fm(T0.vat)+'</td><td>'+fm(T1.vat)+'</td></tr>'+
+      '<tr><td>Dự phòng phát sinh <input type="number" class="q" id="qCont" value="'+v.cont+'" style="width:52px">%</td><td>'+fm(T0.cont)+'</td><td>'+fm(T1.cont)+'</td></tr>'+
+      '<tr class="tot"><td>TỔNG DỰ KIẾN</td><td>'+fm(T0.total)+'</td><td>'+fm(T1.total)+'</td></tr></table></div>'+
+      '<div style="font-size:.78rem;margin-top:6px">Chênh lệch nếu đạt giá mục tiêu: <b>'+tr(T0.total-T1.total)+'</b>. Tổng dự kiến theo giá thầu = <b>'+tr(T0.total)+'</b>, cao hơn bảng thầu <b>'+tr(T0.total-212213000)+'</b>. VAT chỉ tính trên báo giá thầu và dòng bổ sung có đánh dấu thầu thi công.</div></div>';
+    h+='<div class="panel"><h3 style="margin:0 0 6px;font-size:.95rem">Chi tiết 20 hạng mục</h3><div class="sc"><table><tr><th>#</th><th>Hạng mục</th><th>ĐV</th><th>KL</th><th>Đơn giá</th><th>Giá mục tiêu</th><th>Thành tiền</th><th>Bật</th></tr>';
+    Q.forEach(r=>{ const x=v.q[r[0]];
+      h+='<tr><td>'+r[0]+' '+IC[r[5]]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td><td><input type="number" class="q" step="any" data-q="'+r[0]+':qty" value="'+x.qty+'"></td><td><input type="number" step="10000" data-q="'+r[0]+':price" value="'+x.price+'"></td><td><input type="number" step="10000" data-q="'+r[0]+':tgt" value="'+(x.tgt||'')+'" placeholder="—"></td><td>'+fm(x.qty*x.price)+'</td><td><input type="checkbox" data-q="'+r[0]+':on"'+(x.on?' checked':'')+'></td></tr>'+(r[7]?'<tr><td></td><td colspan="7" class="nt">'+r[7]+'</td></tr>':''); });
+    h+='</table></div></div>';
+    h+='<div class="panel"><h3 style="margin:0 0 6px;font-size:.95rem">Bổ sung ngoài báo giá (mình ước tính, sửa theo thực tế)</h3><div class="sc"><table><tr><th></th><th>Hạng mục</th><th>ĐV</th><th>SL</th><th>Đơn giá</th><th>Thành tiền</th><th>Bật</th></tr>';
+    v.add.forEach((x,i)=>{ h+='<tr><td></td><td>'+x.n+'</td><td>'+x.u+'</td><td><input type="number" class="q" step="any" data-a="'+i+':qty" value="'+x.qty+'"></td><td><input type="number" step="10000" data-a="'+i+':price" value="'+x.price+'"></td><td>'+fm(x.qty*x.price)+'</td><td><input type="checkbox" data-a="'+i+':on"'+(x.on?' checked':'')+'></td></tr>'; });
+    h+='</table></div></div>';
+    h+='<div class="panel"><h3 style="margin:0 0 6px;font-size:.95rem">Cần hỏi lại thầu trước khi ký</h3><ul style="padding-left:18px;font-size:.84rem;line-height:1.6;margin:0">'+ASK.map(x=>'<li>'+x+'</li>').join('')+'</ul><div class="note" style="margin-top:8px">Đơn giá tham khảo trong ghi chú chỉ là mức phổ biến mình ước, không phải báo giá thị trường chính xác tại Đà Nẵng. Nên xin thêm 2 báo giá cùng khối lượng để so.</div></div>';
+    const base=T0.a+T0.vat, ps=v.pay.reduce((a,b)=>a+b,0), PN=['Tạm ứng khi ký hợp đồng','Xong phần thô (đập phá, xây tô, điện nước âm)','Xong hoàn thiện (ốp lát, sơn, cửa, thiết bị)','Giữ lại bảo hành (nghiệm thu cuối)'];
+    h+='<div class="panel"><h3 style="margin:0 0 6px;font-size:.95rem">Đợt thanh toán gợi ý (tính trên báo giá thầu + VAT)</h3><div class="sc"><table style="min-width:0"><tr><th></th><th>Đợt</th><th>%</th><th>Số tiền</th></tr>'+v.pay.map((p,i)=>'<tr><td>'+(i+1)+'</td><td>'+PN[i]+'</td><td><input type="number" class="q" data-p="'+i+'" value="'+p+'" style="width:56px"></td><td>'+fm(base*p/100)+'</td></tr>').join('')+'<tr class="tot"><td></td><td>Tổng</td><td class="'+(ps===100?'':'neg')+'">'+ps+'%</td><td>'+fm(base*ps/100)+'</td></tr></table></div><div style="font-size:.74rem;color:var(--muted)">Chỉ là gợi ý để thương lượng. Phần phát sinh và hạng mục bạn tự mua (điều hoà, bình nóng lạnh) thanh toán riêng.</div>'+
+      '<div class="btnrow" style="margin-top:8px"><button id="qCopy">📋 Copy nội dung hỏi thầu (dán vào Zalo)</button></div></div>';
+    root.innerHTML=h;
+    const num=e=>{const x=parseFloat(String(e.value).replace(',','.')); return isFinite(x)?x:0;};
+    root.querySelectorAll('[data-p]').forEach(e=>e.onchange=()=>{v.pay[+e.dataset.p]=num(e); save(); render();});
+    root.querySelector('#qCopy').onclick=()=>{ const t='Chào anh, em xem báo giá rồi, nhờ anh làm rõ giúp em mấy điểm:\n'+ASK.map((x,i)=>(i+1)+'. '+x).join('\n')+'\nEm cảm ơn anh.';
+      const ok=()=>{ const b=root.querySelector('#qCopy'); if(b) b.textContent='✅ Đã copy'; };
+      if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(ok,()=>{}); else { const a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select(); try{document.execCommand('copy'); ok();}catch(e){} a.remove(); } };
+    root.querySelectorAll('[data-q]').forEach(e=>e.onchange=()=>{const a=e.dataset.q.split(':'),o=v.q[a[0]]; o[a[1]]=a[1]==='on'?e.checked:num(e); save(); render();});
+    root.querySelectorAll('[data-a]').forEach(e=>e.onchange=()=>{const a=e.dataset.a.split(':'),o=v.add[+a[0]]; o[a[1]]=a[1]==='on'?e.checked:num(e); save(); render();});
+    root.querySelector('#qVatOn').onchange=e=>{v.vatOn=e.target.checked;save();render();};
+    root.querySelector('#qVat').onchange=e=>{v.vat=num(e.target);save();render();};
+    root.querySelector('#qCont').onchange=e=>{v.cont=num(e.target);save();render();};
+  }
+  window.__quote={total:u=>totals(!!u).total,get:()=>v,set:x=>{ if(x&&x.q){Object.assign(v,x);save();render();} }};
+  render();
+  document.querySelector('[data-tab="quote"]').addEventListener('click',render);
 })();
 </script>
 </body>
